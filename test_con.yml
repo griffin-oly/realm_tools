@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: datasweep
+- hosts: all
   gather_facts: Yes
   become: Yes
 

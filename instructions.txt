@@ -1,0 +1,4 @@
+# These playbooks are for setting up a new VM to be joined to the domain and also to connect 
+# to the OAI domain.  This gives login rights to the user's in the ITS-RSAToken AD group. And 
+# Sudo rights to the members of the group its-localadminworkstations
+#

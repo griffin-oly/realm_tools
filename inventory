@@ -1,0 +1,17 @@
+[all:vars]
+host_key_checking = False
+
+[test]
+cvyhj2a62v.oai.olympusglobal.com
+
+[datasweep]
+cvyhj2a60v.oai.olympusglobal.com
+cvyhj2a61v.oai.olympusglobal.com
+cvyhj2a62v.oai.olympusglobal.com
+cvyhj2a63v.oai.olympusglobal.com
+[datasweep:vars]
+host_key_checking = False
+[tower]
+CVYHJ3A21.oai.olympusglobal.com
+[wiki]
+cvyhj3a17v.oai.olympusglobal.com

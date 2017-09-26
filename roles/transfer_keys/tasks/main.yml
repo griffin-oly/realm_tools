@@ -1,0 +1,13 @@
+---
+# tasks file for transfer_keys
+# This role takes public keys and makes sure they are in the proper places.
+#
+- name: Set authorized key, removing all the authorized key already set
+  authorized_key:
+    user: adm_goodmg@OAI.OLYMPUSGLOBAL.COM
+    key: '{{ item }}'
+    state: present
+    exclusive: True
+  with_file:
+    - public_keys/adm_goodmg.pub
+    - public_keys/twr_local.pub

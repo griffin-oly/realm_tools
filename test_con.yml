@@ -1,0 +1,14 @@
+---
+# setup for joining realm of a machine
+#
+#
+#
+- hosts: datasweep
+  gather_facts: Yes
+  become: Yes
+
+  tasks:
+
+   - name: Check Connection
+     setup:
+

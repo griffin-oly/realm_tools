@@ -1,0 +1,12 @@
+---
+# setup for joining realm of a machine
+#
+#
+#
+- hosts: all
+  gather_facts: Yes
+  become: Yes
+
+  roles:
+    - system_setup
+    - transfer_keys

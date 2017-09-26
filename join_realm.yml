@@ -1,0 +1,31 @@
+---
+# setup for joining realm of a machine
+#
+#
+#
+- hosts: datasweep
+  gather_facts: Yes
+  become: yes
+
+  roles:
+    - repo-epel
+
+  tasks:
+   - name: Install pip
+     yum: name=python-pip state=latest
+
+   - name: Install pexpect
+     pip:
+       name: pexpect
+
+   - name: Realm Join
+     ignore_errors: True
+     expect:
+       command: /sbin/realm join -v -U 'goodmg' OAI.OLYMPUSGLOBAL.COM
+       timeout: 15
+       responses:
+         (?i)password for: "MyPassordXX$$"
+         Already joined to this domain:
+
+   - name: Limit logins to Group
+     command: /sbin/realm permit -g "ITS-RSAToken"

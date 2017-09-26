@@ -1,0 +1,30 @@
+---
+# tasks file for realm_info
+# Set files mostly templates to support AD logins
+#
+- name: template SSSD.conf
+  template:
+    src: sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Add Group to Sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    # regexp: '^%wheel'
+    regexp: '^"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"'
+    #line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    line: '"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: SetPrompt.sh copy
+  template:
+    src: set-prompt.sh.j2
+    dest: /etc/profile.d/set-prompt.sh
+    owner: root
+    group: root
+    mode: 0555
+

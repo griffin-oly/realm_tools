@@ -7,7 +7,7 @@
     user: adm_goodmg@OAI.OLYMPUSGLOBAL.COM
     key: '{{ item }}'
     state: present
-    exclusive: True
+    exclusive: False
   with_file:
     - public_keys/adm_goodmg.pub
     - public_keys/twr_local.pub

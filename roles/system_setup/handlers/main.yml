@@ -1,2 +1,5 @@
 ---
 # handlers file for realm_info
+#
+- name: restart sssd
+  service: name=sssd state=restarted

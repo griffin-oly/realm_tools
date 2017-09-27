@@ -3,11 +3,14 @@
 # Dest: /etc/sssd/sssd.conf
 # Owner/Perm: root:root 0600
 # 
+# Version 1.01
 [sssd]
 domains = OAI.OLYMPUSGLOBAL.COM
 config_file_version = 2
 services = nss, pam
-default_domain_suffix = OAI.OLYMPUSGLOBAL.COM
+# If you enable this with use_fully_qualified_names = False
+# sss.d won't restart
+# default_domain_suffix = OAI.OLYMPUSGLOBAL.COM
 
 [domain/OAI.OLYMPUSGLOBAL.COM]
 ad_domain = OAI.OLYMPUSGLOBAL.COM
@@ -20,8 +23,9 @@ krb5_renewable_lifetime = 7d
 krb5_renew_interval = 30m
 default_shell = /bin/bash
 ldap_id_mapping = True
-use_fully_qualified_names = True
-fallback_homedir = /home/%u@%d
+# use_fully_qualified_names = True
+use_fully_qualified_names = False
+fallback_homedir = /home/%u
 access_provider = simple
 krb5_map_user = ggriffiniv:adm_goodmg
 simple_allow_groups = ITS-RSAToken

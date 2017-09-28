@@ -1,0 +1,16 @@
+---
+linux:
+   tower:
+      - cvyhj3a21.oai.olympusglobal.com
+   wiki:
+      - cvyhj3a17v.oai.olympusglobal.com
+   datasweep:
+      - cvyhj2a[60:63]v.oai.olympusglobal.com
+   test:
+      - cvyhj2a60v.oai.olympusglobal.com
+
+windows:
+   win2008:
+      - CVYHJ1A06.OAI.OLYMPUSGLOBAL.COM
+      - CVYHJ3A15V.OAI.OLYMPUSGLOBAL.COM
+      - CVYHJ3A34V.OAI.OLYMPUSGLOBAL.COM

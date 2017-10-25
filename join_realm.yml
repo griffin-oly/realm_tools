@@ -21,7 +21,7 @@
    - name: Realm Join
      ignore_errors: True
      expect:
-       command: /sbin/realm join -v -U 'goodmg' OAI.OLYMPUSGLOBAL.COM
+       command: /sbin/realm join -v -U 'griffin.goodman' OAI.OLYMPUSGLOBAL.COM
        timeout: 15
        responses:
          (?i)password for: "CHANGEME!!"

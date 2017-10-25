@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: datasweep
+- hosts: test
   gather_facts: Yes
   become: yes
 
@@ -17,6 +17,8 @@
    - name: Install pexpect
      pip:
        name: pexpect
+   - debug:
+       msg: "Debug of PW: {{ ibsuser_secretPW }}"
 
    - name: Realm Join
      ignore_errors: True
@@ -24,7 +26,7 @@
        command: /sbin/realm join -v -U 'griffin.goodman' OAI.OLYMPUSGLOBAL.COM
        timeout: 15
        responses:
-         (?i)password for: "CHANGEME!!"
+         (?i)password for: "{{ OAI_userpw }}"
          Already joined to this domain:
 
    - name: Limit logins to Group

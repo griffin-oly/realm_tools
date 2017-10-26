@@ -9,6 +9,9 @@ linux:
       - cvyhj2a61v.oai.olympusglobal.com
       - cvyhj2a62v.oai.olympusglobal.com
       - cvyhj2a63v.oai.olympusglobal.com
+   splunk:
+      - CVYHJ1A06V.OAI.OLYMPUSGLOBAL.COM
+      - CVYHJ3311V.OAI.OLYMPUSGLOBAL.COM
    test:
       - cvyhj2a60v.oai.olympusglobal.com
 

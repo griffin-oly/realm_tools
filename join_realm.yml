@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: test
+- hosts: CVYHJ1A06V
   gather_facts: Yes
   become: yes
 

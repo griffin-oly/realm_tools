@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: CVYHJ1A06V
+- hosts: CVYHJ1A06V.OAI.OLYMPUSGLOBAL.COM
   gather_facts: Yes
   become: yes
 
@@ -17,8 +17,6 @@
    - name: Install pexpect
      pip:
        name: pexpect
-   - debug:
-       msg: "Debug of PW: {{ ibsuser_secretPW }}"
 
    - name: Realm Join
      ignore_errors: True

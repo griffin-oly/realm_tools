@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook -i inventory -v system_setup.yml -u adm_goodmg --ask-pass
+ansible-playbook -i inventory -v system_setup.yml -u ibsuser --ask-pass --ask-become-pass

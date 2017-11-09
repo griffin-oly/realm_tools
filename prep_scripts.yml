@@ -3,10 +3,9 @@
 #
 #
 #
-- hosts: magento_stage
+- hosts: prod-splunk
   gather_facts: Yes
   become: Yes
 
   roles:
-    - system_setup
-    - transfer_keys
+    - generate_realm_scripts

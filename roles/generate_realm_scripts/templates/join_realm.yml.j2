@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: magento_stage
+- hosts: CVYHJ3311V.OAI.OLYMPUSGLOBAL.COM
   gather_facts: Yes
   become: yes
 
@@ -32,8 +32,3 @@
 
    - name: Limit logins to Group
      command: /sbin/realm permit -g "ITS-RSAToken"
-
-   - name: restart sssd
-     service:
-         name: sssd
-         state: restarted

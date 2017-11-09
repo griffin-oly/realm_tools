@@ -1,0 +1,6 @@
+---
+### only for non-grouped servers ###
+
+# update when password changed in AD
+# expires every 90 days
+OAI_userpw: "{{ vault_OAI_userpw }}"

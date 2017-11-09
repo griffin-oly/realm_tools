@@ -1,0 +1,12 @@
+---
+# tasks file for generate_realm_scripts
+
+- name: get current directory
+  debug:
+     msg: "Working dir: {{ playbook_dir }}"
+
+- name: copy join script location
+  template:
+     src: join_realm.sh.j2
+     dest: "{{playbook_dir}}/generated/join_realm.sh" 
+     delegate_to: localhost

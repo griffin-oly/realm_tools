@@ -3,10 +3,9 @@
 #
 #
 #
-- hosts: magento_stage
+- hosts: prod-docker
   gather_facts: Yes
   become: Yes
 
   roles:
-    - system_setup
-    - transfer_keys
+    - docker

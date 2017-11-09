@@ -1,14 +1,23 @@
 ---
-# setup for joining realm of a machine
+# Checks basic connectivity for all hosts both windows and linux
 #
 #
 #
-- hosts: all
+- hosts: linux
   gather_facts: Yes
-  become: Yes
+  become: no
 
   tasks:
 
-   - name: Check Connection
+   - name: Check Linux Connections
+     setup:
+
+- hosts: windows
+  gather_facts: Yes
+  become: no
+
+  tasks:
+
+   - name: Check Windows Connections
      setup:
 

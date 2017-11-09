@@ -1,0 +1,6 @@
+---
+### only for splunk servers ###
+
+access_groups: "{{ vault_access_groups }}"
+local_user: "{{ vault_user_name }}"
+local_pw: "{{ vault_user_pw }}"

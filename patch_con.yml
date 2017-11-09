@@ -1,0 +1,14 @@
+---
+# Checks basic connectivity for all hosts both windows and linux
+#
+#
+#
+- hosts: patch_group1
+  gather_facts: Yes
+  become: no
+
+  tasks:
+
+   - name: Check Linux Connections
+     setup:
+

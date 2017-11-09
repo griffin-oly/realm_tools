@@ -1,0 +1,17 @@
+---
+# Checks basic connectivity for all hosts both windows and linux
+#
+#
+#
+- hosts: patch_group1
+  gather_facts: Yes
+  become: no
+
+  tasks:
+
+   - name: Version Check
+     debug: 
+        msg: "{{ ansible_distribution_version }}"
+     tags: version_check
+
+

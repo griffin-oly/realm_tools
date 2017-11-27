@@ -1,0 +1,16 @@
+---
+# defaults file for magento-redis
+
+redis_slices:
+  - "redis@fpc-prod"
+  - "redis@obj-prod"
+  - "redis@ses-prod"
+
+redis_daemon: "redis.target"
+
+redis_configs:
+  - "base.conf"
+  - "obj-prod.conf"
+  - "ses-prod.conf"
+  - "fpc-prod.conf"
+

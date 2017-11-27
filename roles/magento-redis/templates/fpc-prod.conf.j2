@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+## blueacorn redis fpc-prod config
+# 0:6380 ses-prod
+# 0:6381 fpc-prod
+# 0:6382 obj-prod
+##
+
+include /etc/redis/base.conf
+
+port 6381
+maxmemory 2gb
+dbfilename fpc-prod.rdb
+appendfilename fpc-prod.aof
+
+pidfile /var/run/redis/fpc-prod.pid
+logfile /var/log/redis/fpc-prod.log

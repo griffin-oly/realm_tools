@@ -1,0 +1,8 @@
+---
+- hosts: autobots
+  gather_facts: yes
+  tasks:
+  - name: Gather facts
+    debug:
+       var: hostvars[inventory_hostname]
+       verbosity: 4

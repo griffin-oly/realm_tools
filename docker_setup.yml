@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: prod-docker
+- hosts: brehj1a70v.oai.olympusglobal.com
   gather_facts: Yes
   become: Yes
 

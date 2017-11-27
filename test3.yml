@@ -1,0 +1,6 @@
+---
+- hosts: autobots
+  gather_facts: yes
+  tasks:
+  - name: Dump all facts
+    debug: var=hostvars[inventory_hostname]

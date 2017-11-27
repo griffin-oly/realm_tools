@@ -2,15 +2,15 @@
 # tasks file for docker
 
 # Run this only if we really want to remove Docker in the future
-#- name: ensure old docker removed
-#  yum:
-#    name: "{{ item }}"
-#    state: removed
-#  with_items:
-#     - docker-common
-#     - docker-selinux
-#     - docker-engine
-#  notify: yum-clean-metadata
+- name: ensure old docker removed
+  yum:
+    name: "{{ item }}"
+    state: removed
+  with_items:
+     - docker-common
+     - docker-selinux
+     - docker-engine
+  notify: yum-clean-metadata
 
 - name: Update Repo for Docker-CE
   yum_repository:

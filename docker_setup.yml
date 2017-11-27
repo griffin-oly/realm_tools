@@ -1,0 +1,11 @@
+---
+# setup for joining realm of a machine
+#
+#
+#
+- hosts: cvyhj2a61v.oai.olympusglobal.com
+  gather_facts: Yes
+  become: Yes
+
+  roles:
+    - docker

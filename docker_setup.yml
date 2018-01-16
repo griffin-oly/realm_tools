@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: cvyhj2a61v.oai.olympusglobal.com
+- hosts: docker
   gather_facts: Yes
   become: Yes
 

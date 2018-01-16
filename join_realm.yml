@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: magento_stage
+- hosts: 
   gather_facts: Yes
   become: yes
 

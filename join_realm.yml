@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: 
+- hosts: brehj1a72v.oai.olympusglobal.com
   gather_facts: Yes
   become: yes
 

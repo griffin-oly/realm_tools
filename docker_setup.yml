@@ -4,6 +4,7 @@
 #
 #
 - hosts: docker
+=======
   gather_facts: Yes
   become: Yes
 

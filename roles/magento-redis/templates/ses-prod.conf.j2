@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+
+## blueacorn redis ses-prod config
+# 0:6380 ses-prod
+# 0:6381 fpc-prod
+# 0:6382 obj-prod
+##
+
+include /etc/redis/base.conf
+
+port 6380
+maxmemory 10gb
+dbfilename ses-prod.rdb
+appendfilename ses-prod.aof
+
+pidfile /var/run/redis/ses-prod.pid
+logfile /var/log/redis/ses-prod.log
+
+# sessions save to disk!
+save 900 1
+save 300 10
+save 60 10000

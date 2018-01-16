@@ -8,8 +8,34 @@
   yum: name=* state=latest update_cache=yes
   tags: patch
 
-- name: Compair Kernel versions
-  shell: if [ $(rpm -q kernel --queryformat '%{installtime} %{version}-%{release}.%{arch}\n' | sort -n -k1 | tail -1 | cut -d ' ' -f 2) != $(uname -r) ]; then echo 'reboot'; else echo 'no'; fi
-  ignore_errors: true
-  register: reboot_hint
-  tags: reboot
+# - name: Compair Kernel versions
+#   shell: if [ $(rpm -q kernel --queryformat '%{installtime} %{version}-%{release}.%{arch}\n' | sort -n -k1 | tail -1 | cut -d ' ' -f 2) != $(uname -r) ]; then echo 'reboot'; else echo 'no'; fi
+#   ignore_errors: true
+#   register: reboot_hint
+#   tags: reboot
+# 
+# - name: Rebooting {{ inventory_hostname }}
+#   command: shutdown -r now "Ansible kernel update applied"
+#   async: 0
+#   poll: 0
+#   ignore_errors: true
+#   become: true
+#   when: reboot_hint.stdout == 'reboot'
+#   register: rebooting
+# 
+# - name: Reboot | Wait for {{ inventory_hostname }} to go down
+#   local_action: wait_for host={{ inventory_hostname }} port=22 state=stopped
+#   register: timedown
+#   when: reboot_hint.stdout == 'reboot'
+# 
+# - debug: var=timedown
+#   when: reboot_hint.stdout == 'reboot'
+# 
+# - name: Reboot | Wait for {{ inventory_hostname }} to reboot
+#   local_action: wait_for host={{ inventory_hostname }} port=22 state=started delay=30
+#   register: timeup
+#   when: reboot_hint.stdout == 'reboot'
+# 
+# - debug: msg=”Up after {{ timeup.elapsed }} seconds”
+#   when: reboot_hint.stdout == 'reboot'
+

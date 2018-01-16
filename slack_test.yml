@@ -1,0 +1,17 @@
+---
+# Checks ability to send slack messages
+# this can be included in modules.
+#
+#
+- hosts: test
+  gather_facts: no
+  become: no
+
+
+  tasks:
+
+  - include_role:
+      name: slack-notification
+    vars:
+      slack_message: "Processing host {{inventory_hostname}}"
+

@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+## blueacorn redis obj-prod config
+# 0:6380 ses-prod
+# 0:6381 fpc-prod
+# 0:6382 obj-prod
+##
+
+include /etc/redis/base.conf
+
+port 6382
+maxmemory 2gb
+dbfilename obj-prod.rdb
+appendfilename obj-prod.aof
+
+pidfile /var/run/redis/obj-prod.pid
+logfile /var/log/redis/obj-prod.log

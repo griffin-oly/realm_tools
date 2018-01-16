@@ -1,0 +1,25 @@
+---
+
+- hosts: linux-redis_dev
+  gather_facts: yes
+  become: yes
+
+
+  tasks:
+
+  - include_role:
+      name: slack-msg
+    vars:
+      slack_message: "Starting role Redis_check {{inventory_hostname}}"
+      slack_channel: "#ansible_notification"
+
+  - name: Run role
+    include_role:
+      name: magento-redis
+    tags: magento
+
+  - include_role:
+      name: slack-msg
+    vars:
+      slack_message: "Ending Ansible Script for {{inventory_hostname}}"
+      slack_channel: "#ansible_notification"

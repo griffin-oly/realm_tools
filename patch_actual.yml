@@ -4,9 +4,10 @@
 #
 #
 # - hosts: patch_group1
-- hosts: test
+- hosts: linux-redis
   gather_facts: Yes
   become: yes
+  serial: 1
 
   roles:
     - yum_updates

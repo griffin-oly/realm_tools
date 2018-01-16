@@ -1,0 +1,73 @@
+---
+# tasks file for magento-redis
+# Instructions only during upgrade from old init files
+##############################
+# Make sure to backup old init.d files for redis
+# also kill redis with "kill -9"
+# The command ps -ef |grep redis should be clean
+#
+# After the intial upgrade to systemd redis there is no
+# need to use kill -9 to stop redis.
+# User systemctl stop redis.target   # to stop all redis slices
+#
+- name: Insure redist latest version
+  yum:
+    name: redis
+    state: latest
+  notify: restart redis
+  tags: install
+
+#- name: Backup old init files for Redis
+#  archive:
+#    path: /etc/init.d/redis*
+#    dest: /etc/init.d/redis_backup.zip
+#  tags: backup
+
+- name: Create directory if not already there
+  file:
+    path: /etc/redis
+    state: directory
+    owner: tsm
+    group: tsm
+    mode: 0751
+
+- name: Copy files to redis folder
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/redis/{{ item }}"
+  with_items: "{{ redis_configs }}"
+  notify:
+    - restart redis
+
+- name: Move files to system folder
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/systemd/system/{{ item }}"
+  with_items:
+    - redis@.service
+    - redis.target
+  notify: 
+    - reload systemd
+    - restart redis
+
+
+- name: Ensure Redis is running
+  # Enable all slices and make sure they are started
+  service: "name={{ item }} state=started enabled=yes"
+  with_items: "{{ redis_slices }}"
+
+
+- name: Test for Redis slices
+  # there should be 3 of them.
+  shell: "ps -ef |grep redis"
+  register: myoutput
+
+- include_role:
+    name: slack-msg
+  vars:
+    slack_message: "{{ myoutput.stdout_lines }}"
+    slack_channel: "#ansible_notification"
+
+- debug:
+    msg: "{{ myoutput.stdout_lines }}"
+    

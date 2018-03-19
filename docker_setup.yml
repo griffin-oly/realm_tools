@@ -1,9 +1,9 @@
 ---
-# setup for joining realm of a machine
+# setup for docker on a new machine
 #
 #
 #
-- hosts: docker
+- hosts: cvyhj2a24v.oai.olympusglobal.com cvyhj2a25v.oai.olympusglobal.com
   gather_facts: Yes
   become: Yes
 

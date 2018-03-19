@@ -7,3 +7,7 @@ local_pw: "{{ vault_user_pw }}"
 
 group_package_install:
    - docker-ce
+   - htop
+
+group_package_remove:
+   - firefox

@@ -48,5 +48,21 @@
   action: fail
   when: output_text.stdout.find("Hello from Docker!") == -1
 
+- name: Update REPO for K8s
+  template:
+    src: kubernetes.repo.j2
+    dest: /etc/yum.repos.d/kubernetes.repo
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Install K8s
+  yum:
+    name: "{{ item }}"
+    state: installed 
+  with_items:
+     - kubelet
+     - kubeadm
+     - kubectl
      
   

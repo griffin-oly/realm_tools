@@ -21,6 +21,24 @@
     line: '"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
     validate: visudo -cf %s
 
+- name: Add ITS-IBD-MULE to Sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    # regexp: '^%wheel'
+    regexp: '^"%ITS-IBD-Mule@OAI.OLYMPUSGLOBAL.COM"'
+    #line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    line: '"%ITS-IBD-Mule@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: Add Wheel to Sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+
 - name: SetPrompt.sh copy
   template:
     src: set-prompt.sh.j2
@@ -28,4 +46,14 @@
     owner: root
     group: root
     mode: 0555
+
+- name: Install common packages
+  yum: name={{item}} state=latest
+  with_items: "{{ common_packages }}"
+  when: common_packages is defined
+
+- name: Remove excess packages
+  yum: name={{item}} state=absent
+  with_items: "{{ group_package_remove }}"
+  when: group_package_remove is defined
 

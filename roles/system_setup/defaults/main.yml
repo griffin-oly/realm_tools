@@ -2,3 +2,22 @@
 # defaults file for realm_info
 
 access_groups: "ITS-RSAToken, Unix_admin"
+
+
+common_packages:
+  - vim           # basic text editor
+  - bind-utils    # dig ifconfig etc.
+  - htop          # similar to standard top but with more features.
+  - net-tools     # Misc networking tools.
+  - zip           # archiving tool
+  - unzip         # archiving tool
+  - gzip          # archiving tool
+  - tcpdump       # network scan tool
+  - sshpass
+  - nfs-utils
+  - cifs-utils
+  - telnet
+  - yum-cron
+  - file
+  - lsof
+  - openssh-clients

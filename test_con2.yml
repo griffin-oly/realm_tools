@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: mytest
+- hosts: linux
   gather_facts: Yes
   become: no
 
@@ -12,12 +12,12 @@
    - name: Check Linux Connections
      setup:
 
-#- hosts: windows
-#  gather_facts: Yes
-#  become: no
-#
-#  tasks:
-#
-#   - name: Check Windows Connections
-#     setup:
+- hosts: windows
+  gather_facts: Yes
+  become: no
+
+  tasks:
+
+   - name: Check Windows Connections
+     setup:
 

@@ -1,0 +1,10 @@
+---
+# tasks file for mytestrole
+
+- name: test copy a template testfile
+  template:
+    src: mytesttemplate.j2
+    dest: /tmp/mytestconfig.ini
+    owner: root
+    group: root
+    mode: 0600

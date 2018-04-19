@@ -1,0 +1,14 @@
+---
+### only for test ###
+
+access_groups: "{{ vault_access_groups }}"
+local_user: "{{ vault_user_name }}"
+local_pw: "{{ vault_user_pw }}"
+mysecret_pw: "{{ vault_test_group1 }}"
+
+group_package_install:
+   - xeyes
+   - telnet
+
+group_package_remove:
+   - firefox

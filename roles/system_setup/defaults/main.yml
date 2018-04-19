@@ -17,7 +17,7 @@ common_packages:
   - nfs-utils
   - cifs-utils
   - telnet
-  - yum-cron
+#   - yum-cron
   - file
   - lsof
   - openssh-clients

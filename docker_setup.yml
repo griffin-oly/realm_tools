@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: cvyhj2a24v.oai.olympusglobal.com cvyhj2a25v.oai.olympusglobal.com
+- hosts: cvyhj3a04v.oai.olympusglobal.com
   gather_facts: Yes
   become: Yes
 

@@ -14,6 +14,7 @@ linux:
       - CVYHJ3311V.OAI.OLYMPUSGLOBAL.COM
    test:
       - cvyhj2a60v.oai.olympusglobal.com
+      - cvyhj3a05v.oai.olympusglobal.com
 
 windows:
    win2008:

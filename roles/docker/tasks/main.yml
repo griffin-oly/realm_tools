@@ -30,7 +30,7 @@
 - name: Install Docker-CE
   yum:
     name: docker-ce
-    state: latest
+    state: installed
   notify: restart-docker
 
 - name: Start Docker-CE

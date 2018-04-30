@@ -24,7 +24,24 @@
 - name: move cert for node kubecluster
   copy:
     src: "{{ role_path }}/files/kubecluster.oai.olympusglobal.com.2018.crt"
+    dest: /etc/docker/certs.d/kubecluster.oai.olympusglobal.com:8443/client.cert
+
+
+- name: move key for node kubecluster
+  copy:
+    src: "{{ role_path }}/files/kubecluster.oai.olympusglobal.com.2018.key"
+    dest: /etc/docker/certs.d/kubecluster.oai.olympusglobal.com:8443/client.key
+
+
+- name: move ca_cert for OlympusGlobal
+  copy:
+    src: "{{ role_path }}/files/olympusglobal_ca.crt"
     dest: /etc/docker/certs.d/kubecluster.oai.olympusglobal.com:8443/ca.crt
+
+
+
+
+
 
 - name: Update host file for kubecluster
   lineinfile:
@@ -36,10 +53,15 @@
 
 # not used but still nice to try since insecure registries are not appartently working
 #
+- name: delete bogus docker.json
+  file:
+    dest: /etc/docker/docker.json
+    state: absent
+
 - name: template docker.json.j2
   template:
-    src: docker.json.j2
-    dest: /etc/docker/docker.json
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
     owner: root
     group: root
     mode: 0600

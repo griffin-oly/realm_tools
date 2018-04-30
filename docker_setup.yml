@@ -3,10 +3,10 @@
 #
 #
 #
-- hosts: docker
+- hosts: cvyhj1a08v.oai.olympusglobal.com
   gather_facts: Yes
   become: Yes
 
   roles:
-#     - docker
+    # - docker
     - docker-files

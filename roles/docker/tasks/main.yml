@@ -27,11 +27,11 @@
     regexp: '^notify_only='
     line: 'notify_only=0'
 
-- name: Install Docker-CE
-  yum:
-    name: docker-ce-17.03.2.ce-1.el7.centos.x86_64
-    state: installed
-  notify: restart-docker
+#- name: Install Docker-CE
+#  yum:
+#    name: docker-ce-17.03.2.ce-1.el7.centos.x86_64
+#    state: installed
+#  notify: restart-docker
 
 - name: Start Docker-CE
   service:
@@ -56,13 +56,18 @@
     group: root
     mode: 0600
 
-- name: Install K8s
-  yum:
-    name: "{{ item }}"
-    state: installed 
-  with_items:
-     - kubelet
-     - kubeadm
-     - kubectl
+#- name: Install K8s
+#  yum:
+#    name: "{{ item }}"
+#    state: installed 
+#  with_items:
+#     - kubelet
+#     - kubeadm
+#     - kubectl
      
-  
+- name: Install Docker-compose
+  pip:
+     name: "{{ item }}"
+     state: present
+  with_items:
+     - docker-compose

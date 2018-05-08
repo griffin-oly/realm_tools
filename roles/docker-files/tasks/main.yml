@@ -40,23 +40,20 @@
 
 
 
-
-
-
-- name: Update host file for kubecluster
-  lineinfile:
-     path: /etc/hosts
-     regexp: '^10.160.46.88 kubecluster'
-     line: '10.160.46.88 kubecluster.oai.olympusglobal.com kubecluster'
+#- name: Update host file for kubecluster
+#  lineinfile:
+#     path: /etc/hosts
+#     regexp: '^10.160.46.88 kubecluster'
+#     line: '10.160.46.88 kubecluster.oai.olympusglobal.com kubecluster'
 
 
 
 # not used but still nice to try since insecure registries are not appartently working
 #
-- name: delete bogus docker.json
-  file:
-    dest: /etc/docker/docker.json
-    state: absent
+#- name: delete bogus docker.json
+#  file:
+#    dest: /etc/docker/docker.json
+#    state: absent
 
 - name: template docker.json.j2
   template:
@@ -66,3 +63,7 @@
     group: root
     mode: 0600
   notify: restart docker
+
+
+
+

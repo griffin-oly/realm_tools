@@ -40,6 +40,24 @@ cvyhj2a24v.oai.olympusglobal.com
 cvyhj3a21.oai.olympusglobal.com
 cvyhj1a08v.oai.olympusglobal.com
 # cvyhj1a06v.oai.olympusglobal.com
+cvyhj1a02v.oai.olympusglobal.com
+cvyhj1a06v.oai.olympusglobal.com
+cvyhj3a05v.oai.olympusglobal.com
+cvyhj3a04v.oai.olympusglobal.com
+
+[kube_cluster]
+brehj1a71v.oai.olympusglobal.com
+brehj1a72v.oai.olympusglobal.com
+cvyhj2a25v.oai.olympusglobal.com
+cvyhj2a24v.oai.olympusglobal.com
+cvyhj1a08v.oai.olympusglobal.com
+
+[kube_nodes]
+brehj1a71v.oai.olympusglobal.com
+brehj1a72v.oai.olympusglobal.com
+cvyhj2a25v.oai.olympusglobal.com
+cvyhj1a08v.oai.olympusglobal.com
+
 
 [mytest2]
 cvyhj2a25v.oai.olympusglobal.com

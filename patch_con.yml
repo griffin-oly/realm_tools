@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: patch_group1
+- hosts: patch_now
   gather_facts: Yes
   become: no
 

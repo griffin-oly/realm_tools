@@ -3,8 +3,9 @@
 #
 #
 #
-# - hosts: patch_group1
-- hosts: linux-redis
+- hosts: patch_now
+# - hosts: linux-redis
+# - hosts: wiki
   gather_facts: Yes
   become: yes
   serial: 1

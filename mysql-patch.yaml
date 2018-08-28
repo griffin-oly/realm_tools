@@ -1,0 +1,13 @@
+---
+# Copies the mysql config file to the host and restarts mysqld
+#
+#
+#
+- hosts: mysql
+  gather_facts: Yes
+  become: yes
+#  serial: 3
+
+  roles:
+    - mysql-files
+

@@ -1,0 +1,16 @@
+---
+# tasks file for docker-files
+# Copy misc files for the docker nodes
+
+
+- name: remove old docker config file
+  file: path='/etc/docker/docker' state=absent
+
+- name: template docker.json.j2
+  template:
+    src: docker.j2
+    dest: /etc/docker/docker.json
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart docker

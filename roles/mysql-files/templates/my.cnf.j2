@@ -1,0 +1,41 @@
+# Managed by Ansible local changes will be erased after each update
+#
+[mysqld]
+#
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size = 128M
+#
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+#
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M
+# ### plugin-load-add=validate_password.so - loaded in option file
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+innodb_large_prefix=true
+innodb_file_format=barracuda
+innodb_file_per_table=true
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# Recommended in standard MySQL setup
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+##### Added by gg #####
+plugin-load-add=validate_password.so
+validate-password=FORCE_PLUS_PERMANENT
+validate_password_length=10
+validate_password_number_count=1
+
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+

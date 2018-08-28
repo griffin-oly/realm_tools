@@ -67,3 +67,20 @@ cvyhj3a17v.oai.olympusglobal.com
 
 [mule]
 CVYHJ1A01V.oai.olympusglobal.com
+
+[prod-monthly]
+BREHJ3W24V
+CVYHJ3W24V
+CVYHJ3A28V
+CVYHJ3A86V
+CVYHJ3D11V
+
+[dev-monthly]
+BREHJ1A72V
+CVYHJ2A24V
+CVYHJ2A25V 
+BREHJ1W01V
+garden1.olympusamerica.com
+
+[mysql]
+garden1.olympusamerica.com

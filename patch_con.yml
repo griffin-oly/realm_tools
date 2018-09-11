@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: mysql
+- hosts: patch_now
   gather_facts: Yes
   become: no
 

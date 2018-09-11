@@ -35,7 +35,12 @@
   local_action: wait_for host={{ inventory_hostname }} port=22 state=started delay=30
   register: timeup
   when: reboot_hint.stdout == 'reboot'
+<<<<<<< HEAD
 
 - debug: msg=”Up after {{ timeup.elapsed }} seconds”
   when: reboot_hint.stdout == 'reboot'
+=======
+>>>>>>> 0fdb88cb4c963c787bc975b8e46806564d6ba105
 
+- debug: msg=”Up after {{ timeup.elapsed }} seconds”
+  when: reboot_hint.stdout == 'reboot'

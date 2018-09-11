@@ -1,0 +1,12 @@
+- hosts: localhost
+
+  tasks:
+
+    - action: uri url=https://ocarem.com return_content=yes
+      register: webpage
+    
+    - debug:
+        var: webpage
+    
+    - fail: msg='service is not happy'
+      when: "'AWESOME' not in webpage.content"

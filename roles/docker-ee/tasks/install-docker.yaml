@@ -1,0 +1,59 @@
+- name: Docker | EE | Store Docker EE repository URL
+  copy:
+    content: "{{ docker_ee_url }}"
+    dest: /etc/yum/vars/dockerurl
+
+
+- name: Docker dockerosversion
+  copy:
+    content: "{{ docker_dockerosversion }}"
+    dest: /etc/yum/vars/dockerosversion
+
+- name: Uninstall old Docker versions
+  yum:
+    name: "{{ item }}"
+    state: removed
+  with_items:
+     - docker
+     - docker-client
+     - docker-client-latest
+     - docker-common
+     - docker-latest
+     - docker-latest-logrotate
+     - docker-logrotate
+     - docker-selinux
+     - docker-engine-selinux
+     - docker-engine
+     - docker-ce
+     - docker-ce-selinux
+  notify: yum-clean-metadata
+
+- name: Install Docker required packages
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+     - yum-utils
+     - device-mapper-persistent-data
+     - lvm2
+
+- name: Remove Docker-CE Repo
+  # Remove docker-ce.repo
+  file:
+     path: /etc/yum.repos.d/docker-ce.repo
+     state: absent
+
+- name: Enable extras repo
+  shell: yum-config-manager --enable rhel-7-server-extras-rpms
+
+- name: Add Docker-EE Repo
+  shell: yum-config-manager --add-repo "{{ docker_repo_url }}"
+
+- name: Set Latest Docker Version
+  shell: yum-config-manager --enable docker-ee-stable-18.03
+
+- name: Install Docker-ee
+  yum:
+    name: docker-ee
+    state: installed
+  notify: restart-docker

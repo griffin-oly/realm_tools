@@ -1,0 +1,12 @@
+---
+# setup for docker on a new machine
+#
+#
+#
+# - hosts: docker_test
+- hosts: localhost
+  gather_facts: Yes
+  become: Yes
+
+  roles:
+    - docker-ee

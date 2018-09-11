@@ -4,6 +4,7 @@
 #
 #
 - hosts: patch_now
+# - hosts: mysql
   gather_facts: Yes
   become: no
 

@@ -1,2 +1,12 @@
 ---
 # defaults file for docker
+
+docker_ee_url: "https://storebits.docker.com/ee/m/sub-bbe70b05-17d6-4ee6-98e2-0a722e8bdacf/rhel"
+docker_repo_url: "{{ docker_ee_url }}/docker-ee.repo"
+docker_dockerosversion: "7"
+### Docker version Info ###
+# docker version --format '{{.Server.Version}}'
+docker_install_version: "18.03.1-ee-3"
+
+docker_ee_installed: False
+

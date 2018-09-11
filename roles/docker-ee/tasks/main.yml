@@ -1,7 +1,41 @@
 ---
 # tasks file for docker
 
- Run this only if we really want to remove Docker in the future
+- name: Get Installed Docker Version
+  # shell: "docker version --format '{{.Server.Version}}'"
+  shell: "docker version --format '{{ '{{' }} .Server.Version {{ '}}' }}'"
+  register: version
+  changed_when: False
+  ignore_errors: yes
+
+- name: Set Fact with Installed Docker Version
+  set_fact:
+    docker_installed_version: "{{ version.stdout }}"
+
+- name: SetDocker Var
+  set_fact:
+    docker_ee_installed: True
+  when: version.stdout == docker_install_version
+
+- debug:
+    var: docker_ee_installed
+
+
+- name: Docker | EE | Store Docker EE repository URL
+  copy:
+    content: "{{ docker_ee_url }}"
+    dest: /etc/yum/vars/dockerurl
+  when: not docker_ee_installed
+
+
+- name: Docker dockerosversion
+  copy:
+    content: "{{ docker_dockerosversion }}"
+    dest: /etc/yum/vars/dockerosversion
+  when: not docker_ee_installed
+
+
+#  Run this only if we really want to remove Docker in the future
 - name: Uninstall old Docker versions
   yum:
     name: "{{ item }}"
@@ -18,43 +52,47 @@
      - docker-engine-selinux
      - docker-engine
      - docker-ce
+     - docker-ce-selinux
   notify: yum-clean-metadata
+  when: not docker_ee_installed
+
+- name: Install Docker required packages
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+     - yum-utils
+     - device-mapper-persistent-data
+     - lvm2
+  when: not docker_ee_installed
 
 - name: Remove Docker-CE Repo
   # Remove docker-ce.repo
   file:
      path: /etc/yum.repos.d/docker-ce.repo
      state: absent
+  when: not docker_ee_installed
 
+- name: Enable extras repo
+  shell: yum-config-manager --enable rhel-7-server-extras-rpms
+  when: not docker_ee_installed
 
+- name: Add Docker-EE Repo
+  shell: yum-config-manager --add-repo "{{ docker_repo_url }}"
+  when: not docker_ee_installed
 
+- name: Set Latest Docker Version
+  shell: yum-config-manager --enable docker-ee-stable-18.03
+  when: not docker_ee_installed
 
+- name: Install Docker-ee
+  yum:
+    name: docker-ee
+    state: installed
+  notify: restart-docker
+  when: not docker_ee_installed
 
-
-
-
-- name: Update Repo for Docker-CE
-  yum_repository:
-    name: docker-ce
-    description: Docker CE Stable - $basearch
-    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
-    gpgkey: https://download.docker.com/linux/centos/gpg
-    gpgcheck: yes
-    enabled: yes
-
-- name: Check search-disabled-repos.conf
-  lineinfile:
-    path: /etc/yum/pluginconf.d/search-disabled-repos.conf
-    regexp: '^notify_only='
-    line: 'notify_only=0'
-
-#- name: Install Docker-CE
-#  yum:
-#    name: docker-ce-17.03.2.ce-1.el7.centos.x86_64
-#    state: installed
-#  notify: restart-docker
-
-- name: Start Docker-CE
+- name: Start Docker-EE
   service:
     name: docker
     enabled: yes
@@ -68,20 +106,3 @@
   # if we don't find the text "Hello from Docker" FAIL
   action: fail
   when: output_text.stdout.find("Hello from Docker!") == -1
-
-- name: Update REPO for K8s
-  template:
-    src: kubernetes.repo.j2
-    dest: /etc/yum.repos.d/kubernetes.repo
-    owner: root
-    group: root
-    mode: 0600
-
-#- name: Install K8s
-#  yum:
-#    name: "{{ item }}"
-#    state: installed 
-#  with_items:
-#     - kubelet
-#     - kubeadm
-#     - kubectl

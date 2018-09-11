@@ -45,6 +45,12 @@ cvyhj1a06v.oai.olympusglobal.com
 cvyhj3a05v.oai.olympusglobal.com
 cvyhj3a04v.oai.olympusglobal.com
 
+[docker_ee]
+brehj1a71v.oai.olympusglobal.com
+
+[docker_test]
+10.160.46.198
+
 [kube_cluster]
 brehj1a71v.oai.olympusglobal.com
 brehj1a72v.oai.olympusglobal.com

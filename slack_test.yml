@@ -1,7 +1,7 @@
 ---
 # Checks ability to send slack messages
 # this can be included in modules.
-#
+# Changed in latest change for a test
 #
 - hosts: test
   gather_facts: no

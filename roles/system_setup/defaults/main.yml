@@ -21,3 +21,4 @@ common_packages:
   - file
   - lsof
   - openssh-clients
+  - sssd

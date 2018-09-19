@@ -3,10 +3,11 @@
 #
 #
 #
-- hosts: cvyhj3a04v.oai.olympusglobal.com
+- hosts: system_setup
   gather_facts: Yes
   become: Yes
 
   roles:
+    - geerlingguy.repo-epel
     - system_setup
-    - transfer_keys
+#     - transfer_keys

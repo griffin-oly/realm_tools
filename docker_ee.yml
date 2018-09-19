@@ -3,8 +3,8 @@
 #
 #
 #
-# - hosts: docker_test
-- hosts: localhost
+- hosts: docker_ee
+# - hosts: system_setup
   gather_facts: Yes
   become: Yes
 

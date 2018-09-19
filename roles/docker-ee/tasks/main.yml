@@ -39,3 +39,9 @@
   # if we don't find the text "Hello from Docker" FAIL
   action: fail
   when: output_text.stdout.find("Hello from Docker!") == -1
+
+- name: Install of docker utils etc
+  yum: name={{item}} state=latest
+  with_items: "{{ misc_packages }}"
+  when: misc_packages is defined
+

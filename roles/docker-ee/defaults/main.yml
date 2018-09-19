@@ -10,3 +10,6 @@ docker_install_version: "18.03.1-ee-3"
 
 docker_ee_installed: False
 
+misc_packages:
+   - docker-compose
+

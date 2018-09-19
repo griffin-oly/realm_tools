@@ -2,15 +2,6 @@
 # tasks file for realm_info
 # Set files mostly templates to support AD logins
 #
-- name: template SSSD.conf
-  template:
-    src: sssd.conf.j2
-    dest: /etc/sssd/sssd.conf
-    owner: root
-    group: root
-    mode: 0600
-  notify: restart sssd
-
 - name: Add Group to Sudoers
   lineinfile:
     dest: /etc/sudoers
@@ -56,4 +47,14 @@
   yum: name={{item}} state=absent
   with_items: "{{ group_package_remove }}"
   when: group_package_remove is defined
+
+- name: template SSSD.conf
+  template:
+    src: sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart sssd
+
 

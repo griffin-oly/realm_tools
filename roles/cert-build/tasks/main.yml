@@ -1,0 +1,19 @@
+---
+# tasks file for cert-build
+
+
+- name: Check Directories are there
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ base_loc }}"
+    - "{{ pending_loc }}"
+    - "{{ cert_loc }}"
+    - "{{ private_loc }}"
+
+- name: Copy Template to server
+  template:
+    src: san.cnf.j2
+    dest: "{{ pending_loc }}/san.cnf"
+    mode: '0606'

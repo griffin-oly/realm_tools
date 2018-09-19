@@ -1,0 +1,11 @@
+---
+# setup for docker on a new machine
+#
+#
+#
+- hosts: localhost
+  gather_facts: Yes
+  become: Yes
+
+  roles:
+    - cert-build

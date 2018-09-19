@@ -1,0 +1,30 @@
+---
+# defaults file for cert-build
+
+# file defaults
+# key
+key_name: "key"
+csr_name: "csr"
+crt_name: "crt"
+pfx_name: "pfx"
+# locations
+# base_loc: "/etc/pki/tls"  # base location for certs
+base_loc: "/tmp"
+pending_loc: "{{ base_loc }}/pending"  # pending work directory
+cert_loc: "{{ base_loc }}/cert"   # cert stored here
+private_loc: "{{ base_loc }}/private"   # key stored here
+
+#
+# PW subject to change
+key_pass: "Olympus2018!!"
+# YEAR
+cur_year: "2018"
+
+CN_name: "myplasmabutton.com"
+
+SAN_name:
+  - bigbutton.com
+  - ww1.plasmabutton.com
+  - dev.plasmabutton.com
+  - plasmabutton.com
+  - default.plasmabutton.com

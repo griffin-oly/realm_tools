@@ -1,0 +1,14 @@
+- name: Create san.cnf on server
+  template:
+    src: san.cnf.j2
+    dest: "{{ pending_loc }}/{{ CN_name }}.{{ cur_year }}.cnf"
+    mode: '0606'
+
+- name: Create Private Key
+  # openssl req -out sslcert.csr -newkey rsa:2048 -nodes -keyout private.key -config san.cnf
+  shell:
+    cmd: "openssl req -out {{ sslcert_csr }} -newkey rsa:2048 -nodes -keyout {{ private_key }} -config {{ san_cnf }}"
+    creates: "{{ private_key }}"
+
+
+

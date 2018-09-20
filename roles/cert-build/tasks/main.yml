@@ -7,13 +7,23 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ base_loc }}"
-    - "{{ pending_loc }}"
-    - "{{ cert_loc }}"
-    - "{{ private_loc }}"
+    - "{{ base_loc }}"  # base file path ex: /etc/tls/
+    - "{{ pending_loc }}"  # added to file path ex: {base_loc}/pending
+    - "{{ cert_loc }}"     # storage for certificates
+    - "{{ private_loc }}"  # storage for keys
 
-- name: Copy Template to server
-  template:
-    src: san.cnf.j2
-    dest: "{{ pending_loc }}/san.cnf"
-    mode: '0606'
+
+- name: Check if Private Key exists
+  # must make sure not to over-write an exsisting private key
+  stat:
+    path: "{{ private_loc }}/{{ CN_name }}.{{ cur_year }}.{{ key_name }}"
+  register: key_result
+
+- fail:
+    msg: "The private key {{ CN_name }}.{{ cur_year }}.{{ key_name }} already exist"
+  when: key_result.stat.exists == True
+
+- name: Call create CSR play
+  # create csr only if there is not already a Private Key for this CN
+  include_tasks: create-csr.yaml
+  when: key_result.stat.exists == False

@@ -1,5 +1,16 @@
 ---
 # defaults file for cert-build
+# These need to be overwritten by querry
+CN_name: "plasmabutton.com"
+SAN_name:
+  - plasmabutton.com
+  - www.plasmabutton.com
+
+####################### do not change below this line ########
+
+# YEAR
+cur_year: "2018"
+
 
 # file defaults
 # key
@@ -14,17 +25,12 @@ pending_loc: "{{ base_loc }}/pending"  # pending work directory
 cert_loc: "{{ base_loc }}/cert"   # cert stored here
 private_loc: "{{ base_loc }}/private"   # key stored here
 
+# Filenames
+cur_filename: "{{ CN_name }}.{{ cur_year}}"
+sslcert_csr: "{{ pending_loc }}/{{ cur_filename }}.{{ csr_name }}"
+private_key: "{{ private_loc }}/{{ cur_filename }}.{{ key_name }}"
+san_cnf: "{{ pending_loc }}/{{ cur_filename }}.cnf"
+
 #
 # PW subject to change
 key_pass: "Olympus2018!!"
-# YEAR
-cur_year: "2018"
-
-CN_name: "myplasmabutton.com"
-
-SAN_name:
-  - bigbutton.com
-  - ww1.plasmabutton.com
-  - dev.plasmabutton.com
-  - plasmabutton.com
-  - default.plasmabutton.com

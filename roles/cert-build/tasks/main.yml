@@ -1,6 +1,9 @@
 ---
 # tasks file for cert-build
 
+- debug:
+  msg: "{{ SAN_names_input }}"
+
 
 - name: Check Directories are there
   file:

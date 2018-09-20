@@ -1,10 +1,17 @@
 ---
 # defaults file for cert-build
 # These need to be overwritten by querry
+
+temp_work: []
 CN_name: "plasmabutton.com"
 SAN_name:
   - plasmabutton.com
   - www.plasmabutton.com
+
+SAN_names_input: |-
+  acme.com
+  www.acme.com
+  test.acme.com
 
 ####################### do not change below this line ########
 

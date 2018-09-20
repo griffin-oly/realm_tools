@@ -1,18 +1,18 @@
 ---
 # tasks file for cert-build
 
-- debug:
-    msg: "{{ SAN_names_input }}"
-
-- debug:
-    msg: "{{ SAN_names_input.split('\n') }}"
+# - debug:
+#     msg: "{{ SAN_names_input }}"
+# 
+# - debug:
+#     msg: "{{ SAN_names_input.split('\n') }}"
 
 - set_fact:
     temp_work:  "{{ temp_work }} + ['{{ item }}']"
   with_items: "{{ SAN_names_input.split('\n') }}"
 
-- debug:
-    msg: "{{ temp_work }}"
+#- debug:
+#    msg: "{{ temp_work }}"
 
 - set_fact:
     SAN_name: "{{ temp_work }}"

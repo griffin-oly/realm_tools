@@ -3,8 +3,7 @@
   file:
     path: "{{ item }}"
     state: absent
-    ignore_errors: yes
   with_items:
-    - "{{ pending_loc }}/{{ CN_name }}.{{ cur_year }}.{{ csr_name }}"
-    - "{{ private_loc }}/{{ CN_name }}.{{ cur_year }}.{{ key_name }}"
-    - "{{ pending_loc }}/{{ CN_name }}.{{ cur_year }}.{{ san_name }}"
+    - "{{ sslcert_csr }}"
+    - "{{ private_key }}"
+    - "{{ san_cnf }}"

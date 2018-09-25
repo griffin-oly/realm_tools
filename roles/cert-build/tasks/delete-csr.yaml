@@ -1,0 +1,10 @@
+- name: Delete CSR and Private Key
+  # Attempt to delete all entries with this CN
+  file:
+    path: "{{ item }}"
+    state: absent
+    ignore_errors: yes
+  with_items:
+    - "{{ pending_loc }}/{{ CN_name }}.{{ cur_year }}.{{ csr_name }}"
+    - "{{ private_loc }}/{{ CN_name }}.{{ cur_year }}.{{ key_name }}"
+    - "{{ pending_loc }}/{{ CN_name }}.{{ cur_year }}.{{ san_name }}"

@@ -13,6 +13,8 @@ SAN_names_input: |-
   www.acme.com
   test.acme.com
 
+DEL_CSR: 'No'   # YES - delete old record  - No - default action create CSR and private key
+
 ####################### do not change below this line ########
 
 # YEAR

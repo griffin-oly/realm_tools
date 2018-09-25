@@ -36,7 +36,12 @@
 
 - fail:
     msg: "The private key {{ CN_name }}.{{ cur_year }}.{{ key_name }} already exist"
-  when: key_result.stat.exists == True
+  when: key_result.stat.exists == True and DEL_CSR == False
+
+- name: Delete CSR play
+  # only called if Delete CSR and private key are selected
+  include_tasks: delete-csr.yaml
+  when: key_result.stat.exists == True and DEL_CSR == True
 
 - name: Call create CSR play
   # create csr only if there is not already a Private Key for this CN

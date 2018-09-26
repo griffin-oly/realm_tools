@@ -4,6 +4,7 @@
 
 temp_work: []
 Priv_Key: False
+Cert_OK: False
 #
 CN_name: "donotuse.com"
 SAN_name:
@@ -38,12 +39,15 @@ base_loc: "/etc/pki/tls/test"
 pending_loc: "{{ base_loc }}/pending"  # pending work directory
 cert_loc: "{{ base_loc }}/cert"   # cert stored here
 private_loc: "{{ base_loc }}/private"   # key stored here
+complete_loc: "{{ base_loc }}/complete" # Archive location for completed request
 
 # Filenames
 cur_filename: "{{ CN_name }}.{{ cur_year}}"
 sslcert_csr: "{{ pending_loc }}/{{ cur_filename }}.{{ csr_name }}"
 private_key: "{{ private_loc }}/{{ cur_filename }}.{{ key_name }}"
 san_cnf: "{{ pending_loc }}/{{ cur_filename }}.cnf"
+pfx_filename: "{{ complete_loc }}/{{ cur_filename }}.{{ pfx_name }}"
+cert_filename: "{{ complete_loc }}/{{ cur_filename }}.{{ crt_name }}"
 
 #
 # PW subject to change

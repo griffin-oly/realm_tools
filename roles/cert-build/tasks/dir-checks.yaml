@@ -1,0 +1,32 @@
+# dir-checks.yaml
+# Make sure we have all the target directories first.
+# Also set flag for Private Key.
+#
+
+- set_fact:
+    temp_work:  "{{ temp_work }} + ['{{ item }}']"
+  with_items: "{{ SAN_names_input.split('\n') }}"
+
+- set_fact:
+    SAN_name: "{{ temp_work }}"
+
+- name: Check Directories are there
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ base_loc }}"  # base file path ex: /etc/tls/
+    - "{{ pending_loc }}"  # added to file path ex: {base_loc}/pending
+    - "{{ cert_loc }}"     # storage for certificates
+    - "{{ private_loc }}"  # storage for keys
+    - "{{ complete_loc }}" # archive for completed request
+
+- name: Check if Private Key exists
+  # must make sure not to over-write an exsisting private key
+  stat:
+    path: "{{ private_key }}"
+  register: key_result
+
+- set_fact:
+    Priv_Key: True
+  when: key_result.stat.exists == True

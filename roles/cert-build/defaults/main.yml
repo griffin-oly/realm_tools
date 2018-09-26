@@ -1,22 +1,24 @@
 ---
 # defaults file for cert-build
-# These need to be overwritten by querry
+# These are overwritten by querry from web interface
 
 temp_work: []
-Private_Key: False
-CN_name: "plasmabutton.com"
+Priv_Key: False
+#
+CN_name: "donotuse.com"
 SAN_name:
-  - plasmabutton.com
-  - www.plasmabutton.com
-
+  - replace.com
+  - www.replace.com
+#
 SAN_names_input: |-
-  acme.com
-  www.acme.com
-  test.acme.com
-
-DEL_CSR: 'No'   # YES - delete old record  - No - default action create CSR and private key
-
-JOB: 'NA'    # Which job are we doing for this task
+  www.replace.com
+  test.replace.com
+#
+# JOB: (CLEAN, CSR, PFX, UPLOAD)
+# JOB: 'CLEAN'    # Delete CSR and Private Key and config file
+JOB: 'CSR'      # Create new CSR
+# JOB: 'PFX'      # Generate PFX file
+# JOB: 'UPLOAD'   # Upload new Cert to server
 
 ####################### do not change below this line ########
 
@@ -32,7 +34,7 @@ crt_name: "crt"
 pfx_name: "pfx"
 # locations
 # base_loc: "/etc/pki/tls"  # base location for certs
-base_loc: "/tmp"
+base_loc: "/etc/pki/tls/test"
 pending_loc: "{{ base_loc }}/pending"  # pending work directory
 cert_loc: "{{ base_loc }}/cert"   # cert stored here
 private_loc: "{{ base_loc }}/private"   # key stored here

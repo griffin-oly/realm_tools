@@ -1,5 +1,4 @@
----
-# tasks file for cert-build
+--- # tasks file for cert-build
 # JOB: (CLEAN, CSR, PFX, UPLOAD)
 
 - set_fact:
@@ -27,36 +26,32 @@
 - name: Check if Private Key exists
   # must make sure not to over-write an exsisting private key
   stat:
-    path: "{{ private_loc }}/{{ CN_name }}.{{ cur_year }}.{{ key_name }}"
+    path: "{{ private_key }}"
   register: key_result
 
 - set_fact:
-    Private_Key: True
+    Priv_Key: True
   when: key_result.stat.exists == True
-
-
-
-# Find out which job we are doing
-#- fail: # Check this one.
-#    msg: "The private key {{ CN_name }}.{{ cur_year }}.{{ key_name }} already exist"
-#  when: Private_Key and JOB <> 'CLEAN' or JOB <> 'UPLOAD' 
-
+#
+# CLEAN
 - name: Clean Job
   # Clean out and delete old CSR's and Private Keys
   include_tasks: delete-csr.yaml
-  when: Private_Key and JOB == 'CLEAN'
-
+  when: JOB == 'CLEAN'
+#
+# Create new CSR
 - name: Create new CSR
   # create csr only if there is not already a Private Key for this CN
   include_tasks: create-csr.yaml
-  when: not Private_Key and JOB == 'CSR'
-
+  when: JOB == 'CSR'
+#
+# Upload New Cert
 - name: Upload new Cert
   # Upload a new cert into the correct directory
   include_tasks: upload-cert.yaml
-  when: Private_Key and JOB == 'UPLOAD'
+  when: JOB == 'UPLOAD'
 
 - name: Create PFX
   # take cert and private key and make a PFX file
   include_tasks: create-pfx.yaml
-  when: Private_Key and JOB == 'PFX'
+  when: JOB == 'PFX'

@@ -1,3 +1,10 @@
+- debug:
+    msg: "Priv_Key {{ Priv_Key }}"
+
+- fail: # Check this one.
+    msg: "The private key {{ private_key }} already exist"
+  when: Priv_Key
+
 - name: Create san.cnf on server
   template:
     src: san.cnf.j2

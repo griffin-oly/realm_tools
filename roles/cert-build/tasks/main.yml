@@ -1,11 +1,6 @@
 ---
 # tasks file for cert-build
-
-# - debug:
-#     msg: "{{ SAN_names_input }}"
-# 
-# - debug:
-#     msg: "{{ SAN_names_input.split('\n') }}"
+# JOB: (CLEAN, CSR, PFX, UPLOAD)
 
 - set_fact:
     temp_work:  "{{ temp_work }} + ['{{ item }}']"
@@ -28,22 +23,40 @@
     - "{{ private_loc }}"  # storage for keys
 
 
+
 - name: Check if Private Key exists
   # must make sure not to over-write an exsisting private key
   stat:
     path: "{{ private_loc }}/{{ CN_name }}.{{ cur_year }}.{{ key_name }}"
   register: key_result
 
-- fail:
-    msg: "The private key {{ CN_name }}.{{ cur_year }}.{{ key_name }} already exist"
-  when: key_result.stat.exists == True and DEL_CSR == 'No'
+- set_fact:
+    Private_Key: True
+  when: key_result.stat.exists == True
 
-- name: Delete CSR play
-  # only called if Delete CSR and private key are selected
+
+
+# Find out which job we are doing
+#- fail: # Check this one.
+#    msg: "The private key {{ CN_name }}.{{ cur_year }}.{{ key_name }} already exist"
+#  when: Private_Key and JOB <> 'CLEAN' or JOB <> 'UPLOAD' 
+
+- name: Clean Job
+  # Clean out and delete old CSR's and Private Keys
   include_tasks: delete-csr.yaml
-  when: key_result.stat.exists == True and DEL_CSR == 'Yes'
+  when: Private_Key and JOB == 'CLEAN'
 
-- name: Call create CSR play
+- name: Create new CSR
   # create csr only if there is not already a Private Key for this CN
   include_tasks: create-csr.yaml
-  when: key_result.stat.exists == False and DEL_CSR == 'No'
+  when: not Private_Key and JOB == 'CSR'
+
+- name: Upload new Cert
+  # Upload a new cert into the correct directory
+  include_tasks: upload-cert.yaml
+  when: Private_Key and JOB == 'UPLOAD'
+
+- name: Create PFX
+  # take cert and private key and make a PFX file
+  include_tasks: create-pfx.yaml
+  when: Private_Key and JOB == 'PFX'

@@ -3,6 +3,7 @@
 # These need to be overwritten by querry
 
 temp_work: []
+Private_Key: False
 CN_name: "plasmabutton.com"
 SAN_name:
   - plasmabutton.com
@@ -14,6 +15,8 @@ SAN_names_input: |-
   test.acme.com
 
 DEL_CSR: 'No'   # YES - delete old record  - No - default action create CSR and private key
+
+JOB: 'NA'    # Which job are we doing for this task
 
 ####################### do not change below this line ########
 

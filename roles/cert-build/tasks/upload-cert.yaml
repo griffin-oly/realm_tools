@@ -1,0 +1,4 @@
+- name: Upload Cert
+  debug:
+    msg: "JOB {{ JOB }}"
+

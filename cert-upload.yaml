@@ -1,0 +1,11 @@
+---
+# setup for docker on a new machine
+#
+#
+#
+- hosts: wiki
+  gather_facts: No
+  become: Yes
+
+  roles:
+    - cert-upload

@@ -17,7 +17,9 @@ CN={{ CN_name }}
 [ req_ext ]
 subjectAltName = @alt_names
 
+{% if SAN_names_input <> '' %}
 [ alt_names ]
 {% for SAN_name in SAN_name %}
 DNS.{{ loop.index }} ={{ SAN_name }}
 {% endfor %}
+{% endif %}

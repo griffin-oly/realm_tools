@@ -10,6 +10,9 @@
 - set_fact:
     SAN_name: "{{ temp_work }}"
 
+- debug:
+    msg: "SAN_name: {{ SAN_name }}"
+
 - name: Check Directories are there
   file:
     path: "{{ item }}"

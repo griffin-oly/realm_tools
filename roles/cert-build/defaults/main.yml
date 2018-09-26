@@ -7,9 +7,8 @@ Priv_Key: False
 Cert_OK: False
 #
 CN_name: "donotuse.com"
-SAN_name:
-  - replace.com
-  - www.replace.com
+SAN_name: []
+
 #
 SAN_names_input: |-
   www.replace.com

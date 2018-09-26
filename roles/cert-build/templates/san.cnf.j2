@@ -13,7 +13,7 @@ O=Olympus Corporation of the Americas
 OU=ITS
 emailAddress=domain@olympus.com
 CN={{ CN_name }}
-{% if SAN_names_input != '' %}
+{% if '' != SAN_names_input %}
 [ req_ext ]
 subjectAltName = @alt_names
 [ alt_names ]

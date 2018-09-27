@@ -2,3 +2,7 @@
   debug:
     msg: "JOB {{ JOB }}"
 
+- name: Upload Cert to folder
+  copy:
+    content: "{{ Cert_content }}"
+    dest: "{{ cert_filename }}"

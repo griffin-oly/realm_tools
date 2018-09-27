@@ -16,3 +16,9 @@
   shell:
     cmd: "openssl req -out {{ sslcert_csr }} -newkey rsa:2048 -nodes -keyout {{ private_key }} -config {{ san_cnf }}"
     creates: "{{ private_key }}"
+
+- name: Create email instructions
+  template:
+    src: email.txt.j2
+    dest: "{{ email_filename }}"
+    mode: '0666'

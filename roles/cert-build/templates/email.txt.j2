@@ -1,3 +1,6 @@
+Instructions for how to submit this request:
+#######################
+
 Submit the CSR via cut and paste to:
 https://cvyhj3x21v.oai.olympusglobal.com/certsrv/certrqxt.asp
 
@@ -7,7 +10,7 @@ For Certificate Template: Pick Web Server Certificate
 For SAN certs make sure to include "Additional Attributes"
 ####
 {% if '' != SAN_names_input %}
-SAN:{% for SAN_name in SAN_name %}DNS={{ SAN_name }}&{% endfor %}
+SAN:{% for SAN_name in SAN_name %}DNS={{ SAN_name }}{%- if not loop.last %}&{% else %}{% endif %}{% endfor %}
 {% endif %}
 
 remove the final & off of this string before submitting

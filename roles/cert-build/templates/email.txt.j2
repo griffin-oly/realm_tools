@@ -1,4 +1,14 @@
-Instructions for how to submit this request:
+Instructions for how to submit this request.  The process involves calling the Ansible Tower job several times in order.
+
+Order of running the jobs from tower:
+Job Task:
+   CSR - This generates the CSR file and also the Private key
+   UPLOAD - Upload the Cert when you get it.
+   PFX - This combines the Private Key and Cert into a password protected PFX file.
+   CLEAN - only use this to delete an CSR that was entered incorrectly it deletes the Private key and also the CSR. Be careful.
+
+If any of these jobs shows a failure there should be a message in the window indicating the problem.  To start over from step one, run the CLEAN job from Ansible.
+
 #######################
 
 Submit the CSR via cut and paste to:
@@ -11,6 +21,7 @@ For SAN certs make sure to include "Additional Attributes"
 ####
 Copy and paste this into the window:
 
+{# This adds the line ex:'DNS=acme.com&www.acme.com' #}
 {% if '' != SAN_names_input %}
 SAN:{% for SAN_name in SAN_name %}DNS={{ SAN_name }}{%- if not loop.last %}&{% else %}{% endif %}{% endfor %}
 {% endif %}
@@ -21,7 +32,6 @@ Send an email with the following information.
    To: langroup@olympus.com CC: Enterprise.Apps@olympus.com 
    Body:
 A CSR has been submitted for {{ CN_name }} to the Active Directory Certificate Services Server under the Request ID Number <req number>.  Please reply when certificate is generated.
-
 
 # 
 Once you get the Cert back rerun the Ansible job and chose 'UPLOAD'. This will place the cert in the correct location for the following job which is to generate a PFX file.

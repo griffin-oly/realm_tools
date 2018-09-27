@@ -1,8 +1,10 @@
-- name: Upload Cert
-  debug:
-    msg: "JOB {{ JOB }}"
-
+# - name: Upload Cert to folder
+#   copy:
+#     content: "{{ Cert_content }}"
+#     dest: "{{ cert_filename }}"
+#
 - name: Upload Cert to folder
-  copy:
-    content: "{{ Cert_content }}"
+  template:
+    src: cert.crt.j2
     dest: "{{ cert_filename }}"
+    mode: '0666'

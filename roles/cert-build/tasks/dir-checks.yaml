@@ -24,6 +24,12 @@
     - "{{ private_loc }}"  # storage for keys
     - "{{ complete_loc }}" # archive for completed request
 
+- name: Include instructions in cert folder
+  template:
+    src: instructions.txt.j2
+    dest: "{{ cert_loc }}/instructions.txt"
+    mode: '0666'
+
 - name: Check if Private Key exists
   # must make sure not to over-write an exsisting private key
   stat:

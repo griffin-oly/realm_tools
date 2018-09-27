@@ -6,10 +6,11 @@ temp_work: []
 Priv_Key: False
 Cert_OK: False
 #
-CN_name: "donotuse.com"
+# CN_name: "donotuse.com"
+CN_name: "tower.oai.olympusglobal.com"
 SAN_name: []
 
-#
+# Sample default SAN names
 SAN_names_input: |-
   www.replace.com
   test.replace.com
@@ -19,13 +20,11 @@ SAN_names_input: |-
 JOB: 'CSR'      # Create new CSR
 # JOB: 'PFX'      # Generate PFX file
 # JOB: 'UPLOAD'   # Upload new Cert to server
+#
+# Current year this can be overridden here for working on a different year other than current.
+cur_year: "{{ lookup('pipe','date +%Y') }}"  # capture current year
 
 ####################### do not change below this line ########
-
-# YEAR
-cur_year: "2018"
-
-
 # file defaults
 # key
 key_name: "key"
@@ -47,7 +46,3 @@ private_key: "{{ private_loc }}/{{ cur_filename }}.{{ key_name }}"
 san_cnf: "{{ pending_loc }}/{{ cur_filename }}.cnf"
 pfx_filename: "{{ complete_loc }}/{{ cur_filename }}.{{ pfx_name }}"
 cert_filename: "{{ cert_loc }}/{{ cur_filename }}.{{ crt_name }}"
-
-#
-# PW subject to change
-key_pass: "Olympus2018!!"

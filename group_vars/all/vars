@@ -16,3 +16,5 @@ slack_test_channel: '#ansible_notif_test'
 slack_color: "good"
 
 access_groups: "{{ vault_access_groups }}"
+
+pfx_password: "{{ vault_pfx_password }}"

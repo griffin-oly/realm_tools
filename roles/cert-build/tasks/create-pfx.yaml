@@ -19,5 +19,5 @@
 - name: Create PFX file
 # openssl pkcs12 -export -out tower.oai.olympusglobal.com.pfx -inkey tower.oai.olympusglobal.com.key -in tower.oai.olympusglobal.com.cer
   shell:
-    cmd: "openssl pkcs12 -export -out {{ pfx_filename }} -inkey {{ private_key }} -in {{ cert_filename }} -password pass:{{ key_pass }}"
+    cmd: "openssl pkcs12 -export -out {{ pfx_filename }} -inkey {{ private_key }} -in {{ cert_filename }} -password pass:{{ pfx_password }}"
     creates: "{{ pfx_filename }}"

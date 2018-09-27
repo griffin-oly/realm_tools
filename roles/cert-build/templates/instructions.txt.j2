@@ -1,0 +1,9 @@
+Certs in this folder must have the correct extention. ie: *.{{ crt_name }}
+
+Example tower.oai.olympusglobal.{{ cur_year }}.com.{{ crt_name }}
+
+Make sure to copy this file from the Certificate Authority and rename to match the above template.
+
+After you have the file in this folder you can run the ansible job 'PFX' to create the PFX file in the "{{ complete_loc }}" folder.
+
+

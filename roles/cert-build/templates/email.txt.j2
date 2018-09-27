@@ -9,12 +9,22 @@ For Certificate Template: Pick Web Server Certificate
 
 For SAN certs make sure to include "Additional Attributes"
 ####
+Copy and paste this into the window:
+
 {% if '' != SAN_names_input %}
 SAN:{% for SAN_name in SAN_name %}DNS={{ SAN_name }}{%- if not loop.last %}&{% else %}{% endif %}{% endfor %}
 {% endif %}
 
-remove the final & off of this string before submitting
 # 
-Email body:
-###
+Send an email with the following information.
+
+   To: langroup@olympus.com CC: Enterprise.Apps@olympus.com 
+   Body:
 A CSR has been submitted for {{ CN_name }} to the Active Directory Certificate Services Server under the Request ID Number <req number>.  Please reply when certificate is generated.
+
+
+# 
+Once you get the Cert back rerun the Ansible job and chose 'UPLOAD'. This will place the cert in the correct location for the following job which is to generate a PFX file.
+
+#
+Run the Ansible job a final time to generate the PFX file which is protected with a password.  Get the Password currently in use from TPM.

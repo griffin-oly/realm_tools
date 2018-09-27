@@ -46,7 +46,7 @@ sslcert_csr: "{{ pending_loc }}/{{ cur_filename }}.{{ csr_name }}"
 private_key: "{{ private_loc }}/{{ cur_filename }}.{{ key_name }}"
 san_cnf: "{{ pending_loc }}/{{ cur_filename }}.cnf"
 pfx_filename: "{{ complete_loc }}/{{ cur_filename }}.{{ pfx_name }}"
-cert_filename: "{{ complete_loc }}/{{ cur_filename }}.{{ crt_name }}"
+cert_filename: "{{ cert_loc }}/{{ cur_filename }}.{{ crt_name }}"
 
 #
 # PW subject to change

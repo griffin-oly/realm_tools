@@ -1,6 +1,0 @@
----
-# defaults file for slack-send
-
-slack_channel: "{{ slack_test_channel }}"
-slack_icon: "{{ slack_icon_fail }}"
-slack_color: "danger"

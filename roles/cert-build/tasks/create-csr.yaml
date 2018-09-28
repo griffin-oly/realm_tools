@@ -24,6 +24,7 @@
     mode: '0666' 
 
 - name: Send Slack Email
+  # uses common slack module in /etc/ansible/roles
   include_role:
     name: slack-msg
   vars:
@@ -36,6 +37,7 @@
   register: csr_text
 
 - name: Send Slack CSR record 
+  # uses common slack module in /etc/ansible/roles 
   include_role:
     name: slack-msg
   vars:

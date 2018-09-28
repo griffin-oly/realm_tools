@@ -48,3 +48,6 @@ san_cnf: "{{ pending_loc }}/{{ cur_filename }}.cnf"
 pfx_filename: "{{ complete_loc }}/{{ cur_filename }}.{{ pfx_name }}"
 cert_filename: "{{ cert_loc }}/{{ cur_filename }}.{{ crt_name }}"
 email_filename: "{{ pending_loc }}/{{ cur_filename }}.email.txt"
+
+# Email
+email_out: "{{ lookup('template', 'email.txt.j2') }}"

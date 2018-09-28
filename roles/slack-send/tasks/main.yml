@@ -1,0 +1,8 @@
+---
+# tasks file for slack-send
+
+- name: Slack Notify
+  include_role:
+    name: slack-msg
+  vars:
+    slack_message: "Test Message 2"

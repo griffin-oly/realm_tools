@@ -10,7 +10,8 @@ slack_icon: "https://avatars.slack-edge.com/2017-10-31/264795776869_61dc42b2ef16
 slack_icon_fail: "https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2017-11-13/272494778070_f9cf0ff339d2dd3c6fcb_48.jpg"
 slack_icon_pass: "{{ slack_icon }}"
 # create this channel first before trying to post to it.
-slack_channel: '#ansible_notification'
+# slack_channel: '#ansible_notification'
+slack_channel: '#ansible_notif_test'
 # Good practice to have a test channel for non production test.
 slack_test_channel: '#ansible_notif_test'
 slack_color: "good"

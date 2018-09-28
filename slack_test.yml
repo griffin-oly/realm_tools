@@ -3,15 +3,26 @@
 # this can be included in modules.
 #
 #
-- hosts: test
-  gather_facts: no
+- hosts: wiki
+  gather_facts: Yes
   become: no
 
 
   tasks:
 
-  - include_role:
-      name: slack-notification
-    vars:
-      slack_message: "Processing host {{inventory_hostname}}"
+#  - name: Slack Notify
+#    include_role:
+#      name: slack-msg
+#    vars:
+#      slack_message: "Test Message"
+#      slack_channel: "{{ slack_test_channel }}"
+#      slack_icon: "{{ slack_icon_fail }}"
+#      slack_color: "danger"
+#    tags:
+#      - slack
 
+  - name: Slack Notify2
+    include_role:
+      name: slack-msg
+    vars:
+      slack_message: "Test Message at 11:38"

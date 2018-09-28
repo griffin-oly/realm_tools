@@ -5,7 +5,7 @@
 #
 - hosts: wiki
   gather_facts: No
-  become: Yes
+  become: No
 
   roles:
     - cert-build

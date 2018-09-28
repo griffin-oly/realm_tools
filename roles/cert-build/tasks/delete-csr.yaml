@@ -7,3 +7,4 @@
     - "{{ sslcert_csr }}"
     - "{{ private_key }}"
     - "{{ san_cnf }}"
+    - "{{ email_filename }}"

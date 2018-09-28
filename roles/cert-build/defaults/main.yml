@@ -7,8 +7,8 @@ Priv_Key: False
 Cert_OK: False
 Cert_content: ""
 #
-# CN_name: "donotuse.com"
-CN_name: "tower.oai.olympusglobal.com"
+CN_name: "donotuse.com"
+# CN_name: "tower.oai.olympusglobal.com"
 SAN_name: []
 
 # Sample default SAN names

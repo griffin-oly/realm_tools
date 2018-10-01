@@ -1,0 +1,20 @@
+---
+# tasks file for slack-notification
+# publish message to slack to update status
+#
+#
+- debug: 
+    msg: "MyToken: {{ slack_token }}"
+
+- name: Send notification message via Slack
+  local_action:
+    module: slack
+    # To retrieve your slack token, open your team settings and look for the
+    # Incoming Webhooks plugin
+    # Test
+    token: "{{ slack_token }}"
+    msg: "{{ slack_message }}"
+    icon_url: "{{ slack_icon }}"
+    channel: "{{ slack_channel }}"
+    username: "{{ slack_username }}"
+    color: "{{ slack_color }}"

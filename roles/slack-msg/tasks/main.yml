@@ -7,8 +7,8 @@
     msg: "MyToken: {{ slack_token }}"
 
 - name: Send notification message via Slack
-  local_action:
-    module: slack
+  # local_action:
+  slack:
     # To retrieve your slack token, open your team settings and look for the
     # Incoming Webhooks plugin
     # Test

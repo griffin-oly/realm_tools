@@ -3,8 +3,18 @@
 #     content: "{{ Cert_content }}"
 #     dest: "{{ cert_filename }}"
 #
+
+- debug:
+    msg: "CertLength: {{ Cert_content.length }}"
+
 - name: Upload Cert to folder
   template:
     src: cert.crt.j2
     dest: "{{ cert_filename }}"
     mode: '0666'
+  when: Cert_content.length > 15
+
+- name: Create PFX
+  # take cert and private key and make a PFX file
+  include_tasks: create-pfx.yaml
+  when: Cert_content.length > 15

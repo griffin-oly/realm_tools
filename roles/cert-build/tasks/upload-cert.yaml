@@ -5,7 +5,12 @@
 #
 
 - debug:
-    msg: "CertLength: {{ Cert_content.length }}"
+    msg: "CertLength: {{ Cert_content | length }}"
+
+- assert:
+    that:
+      - "Cert_content | length > 5"
+    msg: "'Cert_content' must have length greater than 5"
 
 - name: Upload Cert to folder
   template:

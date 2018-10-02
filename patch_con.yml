@@ -3,7 +3,8 @@
 #
 #
 #
-- hosts: docker_ee
+- hosts: wiki
+#- hosts: docker_ee
 # - hosts: mysql
   gather_facts: Yes
   become: no

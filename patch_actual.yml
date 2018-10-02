@@ -4,7 +4,8 @@
 #
 #
 # - hosts: patch_group1
-- hosts: patch_now
+- hosts: wiki
+#- hosts: patch_now
 # - hosts: linux-redis
 # - hosts: wiki
 # - hosts: prod-monthly

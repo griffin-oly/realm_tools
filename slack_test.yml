@@ -21,8 +21,11 @@
 #    tags:
 #      - slack
 
-  - name: Slack Notify2
+  - name: Slack Notify
     include_role:
       name: slack-msg
+    when: slack_message | length > 0
     vars:
-      slack_message: "Test Message at 11:38"
+      slack_icon: "{{ slack_icon_fail }}"
+      slack_channel: "{{ slack_test_channel }}"
+      slack_color: "danger"

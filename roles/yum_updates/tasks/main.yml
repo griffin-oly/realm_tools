@@ -31,15 +31,15 @@
   register: rebooting
 
 - name: Reboot | Wait for {{ inventory_hostname }} to come up
-  local_action: 
     # wait_for host={{ inventory_hostname }} port=22 state=started delay=30 timeout=600
-    module: wait_for
-      host: "{{ inventory_hostname }}"
-      port: 22
-      delay: 20
-      timeout: 600
+  wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    delay: 20
+    timeout: 600
   register: timeup
   become: false
+  delegate_to: 127.0.0.1
   when:  reboot_required=="reboot"
 
 - debug: 

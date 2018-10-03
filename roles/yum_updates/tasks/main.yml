@@ -13,28 +13,28 @@
   ignore_errors: true
   register: reboot_hint
   tags: reboot
+
+- set_fact:
+  # reboot_required: "{% if reboot_hint.stdout == 'reboot' %} 'reboot' {% else %} 'no' {% endif %}"
+    reboot_required: 'reboot'
+
+- debug:
+    msg: "Reboot: {{ reboot_required }}"
  
 - name: Rebooting {{ inventory_hostname }}
-  command: shutdown -r now "Ansible kernel update applied"
+  command: "/sbin/shutdown -r +1"
   async: 0
   poll: 0
-  ignore_errors: true
   become: true
-  when: reboot_hint.stdout == 'reboot'
+  ignore_errors: true
+  when: reboot_required=="reboot"
   register: rebooting
 
-- name: Reboot | Wait for {{ inventory_hostname }} to go down
-  local_action: wait_for host={{ inventory_hostname }} port=22 state=stopped
-  register: timedown
-  when: reboot_hint.stdout == 'reboot'
-
-- debug: var=timedown
-  when: reboot_hint.stdout == 'reboot'
-
-- name: Reboot | Wait for {{ inventory_hostname }} to reboot
-  local_action: wait_for host={{ inventory_hostname }} port=22 state=started delay=30
+- name: Reboot | Wait for {{ inventory_hostname }} to come up
+  local_action: wait_for host={{ inventory_hostname }} port=22 state=started delay=30 timeout=600
   register: timeup
-  when: reboot_hint.stdout == 'reboot'
+  become: false
+  when:  reboot_required=="reboot"
 
 - debug: msg=”Up after {{ timeup.elapsed }} seconds”
-  when: reboot_hint.stdout == 'reboot'
+  when:  reboot_required=="reboot"

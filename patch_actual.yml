@@ -11,5 +11,5 @@
 
   roles:
     - yum_updates
-    - reboot-server  # only if kernel has been upgraded.
+    # - reboot-server  # only if kernel has been upgraded.  # this happens as part of yum_updates now
 

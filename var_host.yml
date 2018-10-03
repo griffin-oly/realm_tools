@@ -1,0 +1,26 @@
+---
+# Checks basic connectivity for all hosts both windows and linux
+#
+#
+#
+- hosts: "{{ variable_host | default('mytest') }}"
+  gather_facts: Yes
+  become: no
+
+  tasks:
+
+   - name: Check Linux Connections
+     setup:
+
+   - debug:
+       msg: "Curhost: {{ ansible_hostname }}"
+
+#- hosts: windows
+#  gather_facts: Yes
+#  become: no
+#
+#  tasks:
+#
+#   - name: Check Windows Connections
+#     setup:
+

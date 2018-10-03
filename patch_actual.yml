@@ -1,17 +1,13 @@
 ---
-# Checks basic connectivity for all hosts both windows and linux
+# Patch selected host with Yum update and reboot if kernel is updated.
 #
 #
-#
-# - hosts: patch_group1
-- hosts: wiki
-#- hosts: patch_now
-# - hosts: linux-redis
-# - hosts: wiki
-# - hosts: prod-monthly
+# (patch_group1 wiki patch_now linux-redis prod-monthly)
+# 
+- hosts: "{{ variable_host | default('test') }}"
   gather_facts: Yes
   become: yes
-#  serial: 3
+#  serial: 3    # used when only wanting to do 3 at a time
 
   roles:
     - yum_updates

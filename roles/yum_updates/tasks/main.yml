@@ -15,33 +15,13 @@
   tags: reboot
 
 - set_fact:
-  # reboot_required: "{% if reboot_hint.stdout == 'reboot' %} 'reboot' {% else %} 'no' {% endif %}"
-    reboot_required: 'reboot'
+    reboot_required: "{% if reboot_hint.stdout == 'reboot' %} 'reboot' {% else %} 'no' {% endif %}"
+    # reboot_required: 'reboot'  # set this for testing only will force a reboot evertime
 
-- debug:
-    msg: "Reboot: {{ reboot_required }}"
+# - debug:
+#     msg: "Reboot: {{ reboot_required }}"
  
-- name: Rebooting {{ inventory_hostname }}
-  command: "/sbin/shutdown -r +1"
-  async: 0
-  poll: 0
-  become: true
-  ignore_errors: true
+- name: Call Reboot
+  include_tasks: reboot.yml
   when: reboot_required=="reboot"
-  register: rebooting
 
-- name: Reboot | Wait for {{ inventory_hostname }} to come up
-    # wait_for host={{ inventory_hostname }} port=22 state=started delay=30 timeout=600
-  wait_for:
-    host: "{{ inventory_hostname }}"
-    port: 22
-    delay: 60
-    timeout: 600
-  register: timeup
-  become: false
-  delegate_to: 127.0.0.1
-  when:  reboot_required=="reboot"
-
-- debug: 
-    msg: "Up after {{ timeup.elapsed }} seconds"
-  when: reboot_required=="reboot"

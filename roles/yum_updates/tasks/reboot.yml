@@ -1,0 +1,31 @@
+---
+# Reboot has been requested
+
+- name: Rebooting {{ inventory_hostname }}
+  command: "/sbin/shutdown -r +1"
+  async: 0
+  poll: 0
+  become: true
+  ignore_errors: true
+  register: rebooting
+
+- name: Reboot | Wait for {{ inventory_hostname }} to come up.
+    # wait_for host={{ inventory_hostname }} port=22 state=started delay=30 timeout=600
+  wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    delay: 60
+    timeout: 600
+  register: timeup
+  become: false
+  delegate_to: 127.0.0.1
+
+#- name: Rebooting {{ inventory_hostname }}   # after we can upgrade to Ansible 2.7 currenly we are 2.6
+#  reboot:
+#    reboot_timeout: 3600
+#  when:  reboot_required=="reboot"
+#  register: reboottime
+
+- name: Time system took to return to service.
+  debug: 
+    msg: "{{ timeup.elapsed }} seconds"

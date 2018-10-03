@@ -36,5 +36,6 @@
   become: false
   when:  reboot_required=="reboot"
 
-- debug: msg=”Up after {{ timeup.elapsed }} seconds”
-  when:  reboot_required=="reboot"
+- debug: 
+    msg: "Up after {{ timeup.elapsed }} seconds"
+  when: reboot_required=="reboot"

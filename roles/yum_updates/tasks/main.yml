@@ -24,5 +24,5 @@
  
 - name: Call Reboot
   include_tasks: reboot.yml
-  when: reboot_required=="reboot"
+  when: reboot_required == "reboot"
 

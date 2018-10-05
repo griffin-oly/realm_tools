@@ -1,16 +1,11 @@
 ---
-# Checks basic connectivity for all hosts both windows and linux
+# Checks to make sure all systems that will be patched are available and can connect.
+# Use this before patching a group to be sure that all systems are up and functioning.
 #
-#
-#
-- hosts: wiki
-#- hosts: docker_ee
-# - hosts: mysql
+- hosts: "{{ variable_host | default('test') }}"
   gather_facts: Yes
   become: no
-
   tasks:
-
-   - name: Check Linux Connections
+   - name: Check Connection
      setup:
 

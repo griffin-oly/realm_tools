@@ -3,7 +3,7 @@
 #
 #
 #
-- hosts: cvyhj1a09v
+- hosts: system_setup
   gather_facts: Yes
   become: yes
 
@@ -24,7 +24,7 @@
    - name: Realm Join
      ignore_errors: True
      expect:
-       command: /sbin/realm join -v -U 'griffin.goodman' OAI.OLYMPUSGLOBAL.COM
+       command: /sbin/realm join -v -U 'adm_goodmg' OAI.OLYMPUSGLOBAL.COM
        timeout: 65
        responses:
          (?i)password for: "{{ OAI_userpw }}"

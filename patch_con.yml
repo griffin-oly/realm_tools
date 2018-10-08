@@ -8,4 +8,7 @@
   tasks:
    - name: Check Connection
      setup:
+   
+   - name: Yum History
+     
 

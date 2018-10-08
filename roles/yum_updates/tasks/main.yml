@@ -16,8 +16,8 @@
   tags: reboot
 
 - set_fact:
-    reboot_required: "{% if reboot_hint.stdout == 'reboot' %}true{% else %}false{% endif %}"
-    # reboot_required: 'reboot'  # set this for testing only will force a reboot evertime
+    # reboot_required: "{% if reboot_hint.stdout == 'reboot' %}true{% else %}false{% endif %}"
+    reboot_required: true  # set this for testing only will force a reboot evertime
 
 # - debug:
 #     msg: "Reboot: {{ reboot_required }}"

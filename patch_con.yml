@@ -2,6 +2,10 @@
 # Checks to make sure all systems that will be patched are available and can connect.
 # Use this before patching a group to be sure that all systems are up and functioning.
 #
+# Inputs:
+# variable_host: multipule choice list of servers or groups.
+# specific_server: string or single name of server supplied by tower's query.
+#
 - hosts: localhost
   connection: local
   tasks:
@@ -10,22 +14,19 @@
         run_host: "test"    # Set default server to run on when there is no extra vars passed
         spec_host: False
 
-    - name: Check for specific server populated
+    - name: Check for specific server string
       set_fact:
         run_host: "{{ specific_server }}"
         spec_host: True
       when: specific_server is defined and specific_server|length >= 4
 
-    - name: Else when var host is used 
+    - name: "Else use {{ variable_host }}" 
       set_fact:
         run_host: "{{ variable_host }}"
       when: not spec_host and variable_host is defined
 
-    - debug:
-        msg: "{{ run_host }}"
-
-# - hosts: "{{ variable_host | default('test') }}"
-- hosts: "{{ hostvars['localhost']['run_host'] }}"
+# - hosts: "{{ variable_host | default('test') }}"  # When wanting to supply a default answer of Test otherwise run with whats in variable_host
+- hosts: "{{ hostvars['localhost']['run_host'] }}"  # Example of using what is a global variable in our playbooks
   gather_facts: Yes
   become: no
   tasks:

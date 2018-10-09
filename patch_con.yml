@@ -2,13 +2,34 @@
 # Checks to make sure all systems that will be patched are available and can connect.
 # Use this before patching a group to be sure that all systems are up and functioning.
 #
-- hosts: "{{ variable_host | default('test') }}"
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: SetDefaults
+      set_fact:
+        run_host: "test"    # Set default server to run on when there is no extra vars passed
+        spec_host: False
+
+    - name: Check for specific server populated
+      set_fact:
+        run_host: "{{ specific_server }}"
+        spec_host: True
+      when: specific_server is defined and specific_server|length >= 4
+
+    - name: Else when var host is used 
+      set_fact:
+        run_host: "{{ variable_host }}"
+      when: not spec_host and variable_host is defined
+
+    - debug:
+        msg: "{{ run_host }}"
+
+# - hosts: "{{ variable_host | default('test') }}"
+- hosts: "{{ hostvars['localhost']['run_host'] }}"
   gather_facts: Yes
   become: no
   tasks:
    - name: Check Connection
      setup:
-   
-   - name: Yum History
      
 

@@ -5,7 +5,10 @@
 # Then wait for boxes to come back up by monitoring ssh port connection
 #
 - name: Perform yum update
-  yum: name=* state=latest update_cache=yes
+  yum: 
+    name: "*"
+    state: latest
+    update_cache: yes
   tags: patch
 
 - name: Compair Kernel versions
@@ -25,4 +28,5 @@
 - name: Call Reboot
   include_tasks: reboot.yml
   when: reboot_required
+  tags: reboot
 

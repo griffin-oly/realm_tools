@@ -10,4 +10,5 @@
   become: yes
 
   tasks:
-    setup:
+
+  - setup:

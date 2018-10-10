@@ -1,0 +1,13 @@
+---
+# Setup system from scratch with no account credentials etc.
+# Steps:
+#   1. Setup pw less login
+#   2. Fix visudo to enable pw less sudo
+#   3. Install common packages
+# 
+- hosts: "{{ variable_host | default('test') }}"
+  gather_facts: Yes
+  become: yes
+
+  tasks:
+    setup:

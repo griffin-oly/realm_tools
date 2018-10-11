@@ -16,6 +16,7 @@
     ssh_key_file: /home/loc_ansible/.ssh/id_rsa
     comment: "Ansible System Account"
     group: wheel
+  become: yes
 
 - name: Public key for loc_ansible
   copy:

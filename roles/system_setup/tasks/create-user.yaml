@@ -7,14 +7,14 @@
 - name: Create user loc_ansible
   user:
     name: loc_ansible
-    append: yes
     shell: /bin/bash
     # home: /home/loc_ansible
     password: "{{ loc_ansible_pw | password_hash('sha512', 'secetOlympus2018') }}"
+    password: "{{ loc_ansible_pw | password_hash('sha512') }}"
     create_home: yes
-    generate_ssh_key: yes
+    # generate_ssh_key: yes
     comment: "Ansible System Account"
-    groups: wheel
+    groups: wheel append=yes
 
 - name: Public key for loc_ansible
   copy:

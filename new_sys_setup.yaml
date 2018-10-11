@@ -12,3 +12,7 @@
   tasks:
 
   - setup:
+
+  roles:
+  - geerlingguy.repo-epel
+  - system_setup

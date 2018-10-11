@@ -1,0 +1,28 @@
+- name: Add Group to Sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    # regexp: '^%wheel'
+    regexp: '^"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"'
+    #line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    line: '"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: Add ITS-IBD-MULE to Sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    # regexp: '^%wheel'
+    regexp: '^"%ITS-IBD-Mule@OAI.OLYMPUSGLOBAL.COM"'
+    #line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    line: '"%ITS-IBD-Mule@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: Add Wheel to Sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+

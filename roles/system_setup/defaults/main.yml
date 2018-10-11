@@ -17,8 +17,9 @@ common_packages:
   - nfs-utils
   - cifs-utils
   - telnet
-#   - yum-cron
+#   - yum-cron    # Research
   - file
   - lsof
   - openssh-clients
-  - sssd
+  - sssd             # needed for join domain
+  - krb5-workstation # provides kinit for troubleshooting sso

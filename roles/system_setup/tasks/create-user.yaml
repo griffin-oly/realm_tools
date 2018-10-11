@@ -1,0 +1,27 @@
+---
+# Create user loc_ansible
+# Transfer SSH key for user
+# Set files mostly templates to support AD logins
+#
+
+- name: Create user loc_ansible
+  user:
+    name: loc_ansible
+    shell: /bin/bash
+    home: /home/loc_ansible
+    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretOlympus2018') }}"
+    create_home: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: /home/loc_ansible/.ssh/id_rsa
+    comment: "Ansible System Account"
+    group: wheel
+
+
+- name: Public key for loc_ansible
+  copy:
+    src: authorized_keys
+    dest: /home/loc_ansible/.ssh/authorized_keys
+    mode: 0600
+    owner: loc_ansible
+    group: loc_ansible

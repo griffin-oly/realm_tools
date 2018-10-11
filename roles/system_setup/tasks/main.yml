@@ -2,33 +2,14 @@
 # tasks file for realm_info
 # Set files mostly templates to support AD logins
 #
-- name: Add Group to Sudoers
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    # regexp: '^%wheel'
-    regexp: '^"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"'
-    #line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-    line: '"%its-localadminworkstations@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
-    validate: visudo -cf %s
+#
 
-- name: Add ITS-IBD-MULE to Sudoers
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    # regexp: '^%wheel'
-    regexp: '^"%ITS-IBD-Mule@OAI.OLYMPUSGLOBAL.COM"'
-    #line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-    line: '"%ITS-IBD-Mule@OAI.OLYMPUSGLOBAL.COM"  ALL=(ALL)       NOPASSWD: ALL'
-    validate: visudo -cf %s
+- name: Call create user
+  include_tasks: "create-user.yaml"
 
-- name: Add Wheel to Sudoers
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    regexp: '^%wheel'
-    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-    validate: visudo -cf %s
+- name: Call Update sudoers
+  include_tasks: "sudoers-update.yaml"
+
 
 - name: SetPrompt.sh copy
   template:
@@ -39,14 +20,19 @@
     mode: 0555
 
 - name: Install common packages
-  yum: name={{item}} state=latest
-  with_items: "{{ common_packages }}"
+  yum:
+    name: "{{ common_packages }}"
   when: common_packages is defined
 
 - name: Remove excess packages
-  yum: name={{item}} state=absent
-  with_items: "{{ group_package_remove }}"
+  yum:
+    name: "{{ group_package_remove }}"
   when: group_package_remove is defined
+
+- name: Check for SSSD.conf
+  stat:
+    path: /etc/sssd/sssd.conf
+  register: stat_result
 
 - name: template SSSD.conf
   template:
@@ -56,5 +42,6 @@
     group: root
     mode: 0600
   notify: restart sssd
+  when: stat_result.stat.exists == True
 
 

@@ -4,6 +4,7 @@
 # update when password changed in AD
 # expires every 90 days
 OAI_userpw: "{{ vault_OAI_userpw }}"
+loc_ansible_pw: "{{ vault_loc_ansible_pw }}"
 
 ### Slack Stuff ###
 slack_icon: "https://avatars.slack-edge.com/2017-10-31/264795776869_61dc42b2ef1629b47bbc_72.jpg"

@@ -6,9 +6,18 @@
 
 - name: Call create user
   include_tasks: "create-user.yaml"
+  tags:
+     - user
 
 - name: Call Update sudoers
   include_tasks: "sudoers-update.yaml"
+  tags:
+     - sudoers
+
+- name: Call Yum
+  include_tasks: "yum.yaml"
+  tags:
+     - yum
 
 
 - name: SetPrompt.sh copy
@@ -18,16 +27,6 @@
     owner: root
     group: root
     mode: 0555
-
-- name: Install common packages
-  yum:
-    name: "{{ common_packages }}"
-  when: common_packages is defined
-
-- name: Remove excess packages
-  yum:
-    name: "{{ group_package_remove }}"
-  when: group_package_remove is defined
 
 - name: Check for SSSD.conf
   stat:

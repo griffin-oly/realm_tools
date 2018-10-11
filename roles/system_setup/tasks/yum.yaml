@@ -1,0 +1,13 @@
+---
+# Install and remove packages
+#
+- name: Install common packages
+  yum:
+    name: "{{ common_packages }}"
+  when: common_packages is defined
+
+- name: Remove excess packages
+  yum:
+    name: "{{ group_package_remove }}"
+  when: group_package_remove is defined
+

@@ -3,19 +3,11 @@
 # Transfer SSH key for user
 # Set files mostly templates to support AD logins
 #
-- debug:
-    msg: "User PW: {{ loc_ansible_pw }}"
-
-- name: Create test user
-  user:
-    name: test_ansible
-
-
 - name: Create user loc_ansible
   user:
     name: loc_ansible
     shell: /bin/bash
-    # home: /home/loc_ansible
+    home: /home/loc_ansible
     # password: "{{ loc_ansible_pw | password_hash('sha512', 'secetOlympus2018') }}"
     password: "{{ loc_ansible_pw | password_hash('sha512') }}"
     generate_ssh_key: yes
@@ -23,7 +15,6 @@
     ssh_key_file: .ssh/id_rsa
     comment: "Ansible System Account"
     groups: wheel, users
-  become: yes
 
 - name: Public key for loc_ansible
   copy:

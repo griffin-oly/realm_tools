@@ -8,6 +8,7 @@
 - hosts: "{{ variable_host | default('test') }}"
   gather_facts: Yes
   become: yes
+  become_method: sudo
 
   tasks:
 

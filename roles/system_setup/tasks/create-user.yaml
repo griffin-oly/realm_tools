@@ -6,6 +6,10 @@
 - debug:
     msg: "User PW: {{ loc_ansible_pw }}"
 
+- name: Create test user
+  user:
+    name: test_ansible
+
 
 - name: Create user loc_ansible
   user:

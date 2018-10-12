@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A role to copy the templates to support AD logins.
+A role to copy the templates to support AD logins. As well as general system setup with common packages and users added
 
 Requirements
 ------------

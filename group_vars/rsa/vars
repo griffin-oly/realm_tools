@@ -1,0 +1,4 @@
+---
+### Group vars for rsa group of servers
+
+ansible_user: rsaadmin

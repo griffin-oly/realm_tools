@@ -1,14 +1,36 @@
 ---
-# Checks basic connectivity for all hosts both windows and linux
+# Playbook template for doing ad-hoc queries.
+# 
 #
+# 
+# variable_host: multipule choice list of servers or groups.
+# specific_server: string or single name of server supplied by tower's query.
 #
-#
-# - hosts: patch_group1
-- hosts: test
-  gather_facts: Yes
-  become: yes
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: SetDefaults
+      set_fact:
+        run_host: "test"    # Set default server to run on when there is no extra vars passed
+        spec_host: False
 
-  roles:
-    - yum_updates
-    - reboot-server  # only if kernel has been upgraded.
+    - name: Check for specific server string
+      set_fact:
+        run_host: "{{ specific_server }}"
+        spec_host: True
+      when: specific_server is defined and specific_server|length >= 4
+
+    - name: "Else use {{ variable_host }}" 
+      set_fact:
+        run_host: "{{ variable_host }}"
+      when: not spec_host and variable_host is defined
+
+# - hosts: "{{ variable_host | default('test') }}"  # When wanting to supply a default answer of Test otherwise run with whats in variable_host
+- hosts: "{{ hostvars['localhost']['run_host'] }}"  # Example of using what is a global variable in our playbooks
+  gather_facts: Yes
+  become: no
+  tasks:
+   - name: Check Connection
+     setup:
+     
 

@@ -30,4 +30,5 @@
   gather_facts: no
   become: no
   roles:
+    - system_setup
     - transfer_files

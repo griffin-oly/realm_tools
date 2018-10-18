@@ -30,5 +30,5 @@
   gather_facts: no
   become: no
   roles:
-    - system_setup
+    - { role: system_setup, become: yes }
     - transfer_files

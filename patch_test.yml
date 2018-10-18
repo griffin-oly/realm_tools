@@ -29,8 +29,5 @@
 - hosts: "{{ hostvars['localhost']['run_host'] }}"  # Example of using what is a global variable in our playbooks
   gather_facts: no
   become: no
-  tasks:
-   - name: Check Connection
-     setup:
-     
-
+  roles:
+    - transfer_files

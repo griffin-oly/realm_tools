@@ -27,7 +27,7 @@
 
 # - hosts: "{{ variable_host | default('test') }}"  # When wanting to supply a default answer of Test otherwise run with whats in variable_host
 - hosts: "{{ hostvars['localhost']['run_host'] }}"  # Example of using what is a global variable in our playbooks
-  gather_facts: Yes
+  gather_facts: no
   become: no
   tasks:
    - name: Check Connection

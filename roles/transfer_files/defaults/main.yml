@@ -1,0 +1,7 @@
+---
+# defaults file for transfer_files role
+
+share_path: /mnt/S_Drive/CertImport/
+
+share_file: Hilary_Yen.txt
+

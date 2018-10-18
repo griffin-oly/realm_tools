@@ -1,0 +1,16 @@
+---
+# tasks file for realm_info
+# Set files mostly templates to support AD logins
+#
+#
+
+- name: Copy File to remote server
+  copy:
+    src: "{{ share_path }}{{ share_file }}"
+    dest: "/tmp/{{ share_file }}"
+    owner: loc_ansible
+    group: users
+    mode: 0644
+  tags:
+     - copy
+

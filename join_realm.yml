@@ -30,8 +30,8 @@
          (?i)password for: "{{ OAI_userpw }}"
          Already joined to this domain:
 
-   - name: Limit logins to Group
-     command: /sbin/realm permit -g "ITS-RSAToken"
+#   - name: Limit logins to Group
+#     command: /sbin/realm permit -g "ITS-RSAToken"
 
    - name: restart sssd
      service:

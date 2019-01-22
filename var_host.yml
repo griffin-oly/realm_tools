@@ -1,7 +1,7 @@
 ---
 # Checks basic connectivity for all hosts both windows and linux
 #
-#
+# Changes from my jupyterhub account
 #
 - hosts: "{{ variable_host | default('mytest') }}"
   gather_facts: Yes

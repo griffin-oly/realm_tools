@@ -1,0 +1,11 @@
+---
+- name: Bring up docker containers
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: move template to locaton
+    template:
+       src: /tmp/test.txt.j2
+       dest: /tmp/test.txt
+

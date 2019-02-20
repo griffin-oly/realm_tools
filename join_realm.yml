@@ -7,8 +7,8 @@
   gather_facts: Yes
   become: yes
 
-  roles:
-    - repo-epel
+#  roles:
+#    - repo-epel
 
   tasks:
    - name: Install pip

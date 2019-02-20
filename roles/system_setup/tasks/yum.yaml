@@ -11,3 +11,7 @@
     name: "{{ group_package_remove }}"
   when: group_package_remove is defined
 
+# - name: Install Group packages
+#  include: group_roles.yml
+#  when: group_packages is defined
+

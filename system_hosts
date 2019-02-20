@@ -21,4 +21,7 @@ decepticons
 griffin image="chrismeyers/centos7"
 
 [system_setup]
-uspacv3as03.oai.olympusglobal.com
+uspacv3cs03.oai.olympusglobal.com
+
+[mail_server]
+uspacv3cs03.oai.olympusglobal.com

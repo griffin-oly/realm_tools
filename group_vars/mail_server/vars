@@ -1,0 +1,4 @@
+---
+### MainGroup Servers vars ###
+
+misc_var: "{{ vault_misc }}"

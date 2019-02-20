@@ -1,0 +1,11 @@
+---
+# setup for joining realm of a machine
+#
+#
+#
+- hosts: mail_server
+  gather_facts: Yes
+  become: Yes
+
+  roles:
+    - geerlingguy.postfix
